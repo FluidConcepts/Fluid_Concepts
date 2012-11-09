@@ -1,0 +1,43 @@
+#help-page .content {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background-color: #fff;
+}
+
+#help-page .contain {
+    padding: 15px 5px;
+}
+
+#help-page table {
+    width: 100%;	
+}
+
+#help-page table td {
+	padding: 0px;
+}
+
+#help-page td.title {
+	font-weight: bold
+}
+
+#help-page td.num,
+#help-page td.call {
+    border-bottom: 1px dotted #e2e2e2;	
+    padding-bottom: 10px;
+    
+}
+
+#help-page td.title,
+#help-page td.call {
+	padding-top: 10px;
+}
+
+#help-page td.call {
+	text-align: right;
+}
+
+#help-page td.last {
+    border: none;
+    padding-bottom: 0px;
+}

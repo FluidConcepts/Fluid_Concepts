@@ -1,0 +1,1044 @@
+/*-----------------------------------------------------------------------------------------------------------*/
+/* Mobile Connection Styles                                                                                  */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+/* override themeroller's setting the background-color of our menu icon */
+div[data-role="header"] .ui-btn-up-a {
+    background-color: transparent !important;
+    background-image: none; 
+}
+
+/* set search form elements to equal width for iPad - portrait */
+@media only screen and (min-device-width: 768px) and (orientation: portrait) {	
+	/* select boxes */
+	[class*="listContainer form"] .ui-select {
+		width:100%;
+	}
+	/* text and date inputs */
+	[class*="listContainer form"] .ui-input-datebox,
+	[class*="listContainer form"] input[type="text"] {
+		width:98%;
+	}
+}
+
+/* set search form elements to equal width and set form width for iPad - landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {	
+	/* select boxes */
+	[class*="listContainer form"] .ui-select {
+		width:100%;
+	}
+	/* text and date inputs */
+	[class*="listContainer form"] .ui-input-datebox,
+	[class*="listContainer form"] input[type="text"] {
+		width:98%;
+	}
+	/* set form width to be smaller in landscape mode */
+	[class*="listContainer form"] {
+		margin-left:15%;
+		margin-right:15%;
+	}
+}
+/* ------------------------------------------------------------------ */
+/* remove border from left and right of Header and Footer */
+[data-role="header"],
+[data-role="footer"] {
+	border-left-width:0;
+	border-right-width:0;
+}
+
+.listButtonDown {
+	background:-webkit-gradient(linear,50% 98.9102%,50% 3.26013%,
+	color-stop(0, rgba(63, 117, 153, 1)),
+	color-stop(0.675824, rgba(0, 54, 89, 1)));
+	width:300px;
+	height:50px;
+}
+
+/* ------------------------------ */
+/* MC Search Input */
+/* ------------------------------ */
+/* Default JQM Search Input */
+.searchBar {
+	margin:-15px -15px -15px -15px;
+	padding:5px 5px 10px 5px;
+	border:1px #ccc solid;
+	height:30px;
+	text-align:center;
+}
+
+/* corner radius of the input */
+.searchBar .ui-input-search.ui-shadow-inset.ui-btn-corner-all.ui-btn-shadow.ui-icon-searchfield {
+	-webkit-border-radius:6px;
+}
+
+/* remove JQuery Mobile's shadow on the 'x' icon */
+.ui-input-search.ui-shadow-inset.ui-btn-corner-all.ui-btn-shadow.ui-icon-searchfield a {
+	-webkit-box-shadow:none;
+}
+/* remove JQuery Mobile's shadow on the 'x' icon
+   remove border on 'x' icon */
+.ui-input-search.ui-shadow-inset.ui-btn-corner-all.ui-btn-shadow.ui-icon-searchfield .ui-btn-up-c {
+	-webkit-box-shadow:none;
+	border-width:0;
+}
+
+/* GLOBAL */
+.ui-icon-back {
+	background:transparent url(../images/icon-back.png) no-repeat left top;
+	width:23px;
+	height:18px;
+	background-size:23px 18px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* NAVBAR / TAB BAR                                                                                          */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+.tabBar li a:link,
+.tabBar li a:visited {
+	border-right:1px solid rgba(255, 255, 255, .1);
+	border-left:1px solid rgba(0, 0, 0, .9);
+	background-color:transparent;
+	background-image:none;
+}
+
+.tabBar li:first-child,
+.tabBar li:first-child a {		/* find first list item and the link inside, remove left border */
+	border-left-width:0px;
+}
+
+.tabBar li:last-child, 
+.tabBar li:last-child a {		/* find last list item and the link inside, remove right border */
+	border-right-width:0px;
+}
+
+.tabBar ul li a.ui-btn-active {
+	background:-webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(0, rgba(47, 77, 98, 1)),
+	color-stop(0.5, rgba(35, 57, 74, 1)),
+	color-stop(0.51, rgba(24, 42, 57, 1)),
+	color-stop(1, rgba(39, 57, 69, 1)));
+}
+
+.tabBar ul li a:link[class*="selected"],
+.tabBar ul li a:visited[class*="selected"] {			/* selected tab */
+	background-image:-webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(0, rgba(47, 77, 98, 1)),
+	color-stop(0.5, rgba(35, 57, 74, 1)),
+	color-stop(0.51, rgba(24, 42, 57, 1)),
+	color-stop(1, rgba(39, 57, 69, 1)));
+}
+
+/* icons */
+.tabBar .ui-icon {
+	-webkit-border-radius:0px;
+	background-color:transparent;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+}
+
+.tabBar .ui-icon-mc-more {
+	background:transparent url(../images/icon-more.png) no-repeat center center;
+	width:23px;
+	height:20px;
+}
+
+.tabBar .ui-icon-mc-search {
+	background:transparent url(../images/icon-search.png) no-repeat center center;
+	width:22px;
+	height:22px;
+}
+
+.tabBar .ui-icon-mc-list {
+	background:transparent url(../images/icon-list.png) no-repeat center center;
+	width:22px;
+	height:22px;
+}
+
+.tabBar .ui-icon-mc-calendar  {
+	background:transparent url(../images/icon-events.png) no-repeat center -2px;
+	width:20px;
+	height:22px;
+}
+
+.tabBar .ui-icon-mc-summary {
+	background:transparent url(../images/icon-summary.png) no-repeat center 2px;
+	width:15px;
+	height:14px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* "MORE..." MENU FROM FOOTER NAVBAR / TAB BAR                                                               */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+#more-menu {
+	position:absolute;
+	bottom:50px;
+	border:solid 1px rgba(255, 255, 255, 0.6);
+	background:-webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(0, rgba(49, 56, 60, 1)),
+	color-stop(1, rgba(33, 40, 45, 1)));
+	width:100%;
+	text-shadow:none;
+	margin:0;
+	padding:0;
+	display:none;
+}
+
+#more-menu ul {
+	margin:0;
+	padding:0;
+	list-style:none
+}
+
+#more-menu ul li {
+	background-color:transparent;
+	border-bottom:1px rgba(0, 0, 0, .3) solid;
+	border-top:1px rgba(255, 255, 255, .2) solid;
+}
+
+#more-menu ul li:first-child {
+	border-top-width:0;
+}
+
+#more-menu ul li:last-child {
+	border-bottom-width:0;
+}
+
+#more-menu a:link,
+#more-menu a:visited {
+	color:#fff;
+	text-decoration:none;
+}
+
+#more-menu .ui-btn-inner {
+	border-top-width:0px;
+}
+
+#more-menu .ui-icon {
+	background-color:transparent;
+}
+
+/* header drop shadow */
+
+.headerShadow {
+	box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .5);
+    /*-webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .5);*/
+}
+
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* MENU - Menu at the top right of the screen inside the header toolbar                                      */
+/*-----------------------------------------------------------------------------------------------------------*/
+.ui-icon-menu {
+    width: 18px;
+    height: 18px;
+	background:transparent url(../images/icon-menu.png) no-repeat center 0px;
+}
+
+div.ui-menu-icon {
+	float:right;
+	margin-top:12px;
+	margin-right:16px;
+}
+
+.ui-menu-page-cover {
+    position:absolute;
+    display:none;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 998;
+}
+
+ul.ui-menu {													/* <ul> container for menu items */
+	position:absolute;
+	left:0px;
+	top:43px;
+	z-index:2001;										
+	border:solid 1px rgba(255, 255, 255, 0.2);			/* container border */
+	border-left-width:0;								/* remove border from left and right to remove 2px horizontal scrolling  */
+	border-right-width:0;
+	width:100%;
+	text-shadow:none;
+	padding:0;
+	margin:0;
+	display:none;
+	list-style:none;
+	border-top-width:0;
+}
+
+ul.ui-menu li {												/* list items */
+	float:left;
+	background-color:transparent !important;
+	width:33.33%;										/* defaults to 3 items per row */
+	margin:0px;
+	padding:15px 0;
+	border-width:0;
+}
+
+ul.ui-menu.ui-listview {							/* override JQM margins */
+	margin:0;
+}
+
+ul.ui-menu .ui-btn-up-a {									/* override A swatch button up */
+	background-color:transparent;
+	background-image:none;
+}
+
+ul.ui-menu li,
+ul.ui-menu li .ui-btn-inner.ui-li {
+	border-top-width:0;									/* override JQM button hilite */
+}
+
+ul.ui-menu li a:link.ui-link-inherit,						/* menu links */
+ul.ui-menu li a:visited.ui-link-inherit {
+	text-decoration:none;
+	display:block;
+	text-align:center;
+	font-weight:normal;
+	padding-top:28px;
+	border-right:1px rgba(0, 0, 0, .3) solid;				/* default separator 1 */
+	border-left:1px rgba(255, 255, 255, .2) solid;			/* default separator 2 - when the 2 borders sit next to each other, 
+															   the effect is a sunken line */
+}
+
+/* keep separators in between items only, not outside */
+ul.ui-menu li:first-child a:link.ui-link-inherit,
+ul.ui-menu li:first-child a:visited.ui-link-inherit {
+	border-left-width:0;	/* remove left border from first item */
+	margin-left:-1px;		/* make item display 1px wider to offset the removed border. 
+							   also keeps items from collapsing to less than 3 per row */
+}
+
+ul.ui-menu li:last-child  a:link.ui-link-inherit,
+ul.ui-menu li:last-child  a:visited.ui-link-inherit {
+	border-right-width:0;	/* remove right border from last item */
+	margin-right:-1px;		/* make item display 1px wider to offset the removed border. 
+							   also keeps items from collapsing to less than 3 per row */
+	border-bottom-width:0;
+}
+
+ul.ui-menu li:last-child {
+	border-bottom-width:0;
+}
+
+/* if 3 or more items we need to find the 1st element of each row and... */
+ul.ui-menu li:nth-child(3n+1) a:link.ui-link-inherit,
+ul.ui-menu li:nth-child(3n+1) a:visited.ui-link-inherit {
+	border-left-width:0;	/* remove left border from the 1st, 4th, 7th, etc... */
+}
+
+ul.ui-menu li:nth-child(3n+3) a:link.ui-link-inherit,
+ul.ui-menu li:nth-child(3n+3) a:visited.ui-link-inherit {
+	border-right-width:0;	/* remove right border from last (3rd) items per row */
+}
+
+/* icons */
+ul.ui-menu .ui-icon-home {
+	background:transparent url(../images/icon-home.png) no-repeat center 2px;
+	background-size:21px 16px;
+}
+
+ul.ui-menu .ui-icon-sign-in,
+ul.ui-menu .ui-icon-sign-out {
+	background:transparent url(../images/icon-lock-white.png) no-repeat center 0px;
+}
+
+ul.ui-menu .ui-icon-icon-view {
+	background:transparent url(../images/icon-icon-view.png) no-repeat center 0px;
+}
+
+ul.ui-menu .ui-icon-list-view {
+	background:transparent url(../images/icon-list-view.png) no-repeat center 0px;
+}
+
+ul.ui-menu .ui-icon-choose-date {
+	background:transparent url(../images/icon-events.png) no-repeat center 0px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* "CALENDAR / DATE PICKER" MENU FROM HEADER                                                                 */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+#datebox-container {						/* container element for showing datebox as a menu */
+	margin:-15px;
+	padding:23px 13px;
+	position:absolute;
+	left:0;
+	top:43px;
+	z-index:999;
+	width:100%;
+	display:none;	
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+
+/* override button active state */
+.ui-btn-active {
+	border-top-width:0px;
+}
+
+.ui-li {
+	border-width:0;
+	border-top-width:1px;
+}
+
+.ui-header {
+	height:41px;										/* set header height */
+}
+
+/* over write JQM Header image borders, etc */
+.ui-header .ui-btn  {
+    border: none;
+    -webkit-border: none;
+}
+.ui-header .ui-btn span:not(.ui-btn-corner-all).ui-btn-inner {
+    border-top: none;
+    -webkit-border-top: none;
+}
+.ui-header .ui-btn span:not(.ui-btn-corner-all).ui-btn-inner .ui-icon {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* LIST CONTAINER - wraps a simple list and provides custom UI styles for that list */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+.listContainer {												/* outer container: rounded rectangle with gradient */
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:0px 0px 4px rgba(0, 0, 0, 0.75);
+}
+
+.listContainerInner {
+	margin:1px;
+	padding:0px 8px;
+	border:solid 1px rgba(255, 255, 255, 0.11);
+	-webkit-border-radius:5px;
+}
+
+.listContainer li {
+	background-color:transparent;								/* ensure list items have transparent background */
+	border-bottom:1px rgba(0, 0, 0, .2) solid;					/* separators sunken line style - bottom */
+	border-top:1px rgba(255, 255, 255, .2) solid;				/* separators sunken line style - top */
+	border-left-width:0;
+	border-right-width:0;
+	background-image:none;
+}
+
+/* keep separators in between items only, not outside */
+.listContainer li:first-child {
+	border-top-width:0;											/* remove top border on first row */
+}
+
+.listContainer li:last-child {
+	border-bottom-width:0;										/* remove bottom border on last row */
+}
+
+.listContainer li > a:link {
+	color:#fff;
+	text-shadow: 0 -1px 1px #000;
+	font-weight:normal;
+}
+
+.listContainer .ui-btn-inner {
+	border-top-width:0px;
+}	
+/*
+.listContainer .ui-btn-hover-h {
+	background:transparent;
+}
+
+.listContainer .ui-btn-down-h {
+	background:transparent;
+}
+*/
+
+/* this should only happen on the home page and m-app home page lists (ie. feeds, events, etc...) */
+.listContainer ul li .ui-icon {
+	background-color:transparent;								/* remove background from right arrow in list view */
+	right:0px;
+	-webkit-box-shadow:none;									/* remove JQM box shadow from right arrow */
+}
+
+/*-----------------------------------------*/
+/* form elements in listContainer          */
+/*-----------------------------------------*/
+.listContainer.form label {
+	color:#fff;
+	text-shadow:none;
+}
+
+.listContainer.form ul {
+	margin:0px;
+}
+
+.listContainer.form ul li {
+	background-image:none;
+	border-width:0;
+}
+
+.listContainer.form .listContainerInner {
+	margin:0;
+	padding:0px 8px 0px 8px;
+}
+
+/* buttons, including select, checkbox, and radio
+--------------------------------------------------- */
+
+/* form buttons */
+.listContainer.form div.ui-select a,
+.listContainer.form a:link,
+.listContainer.form a:visited,
+.listContainer.form div.ui-checkbox label,
+.listContainer.form input[type="button"],
+.listContainer.form input[type="submit"],
+.listContainer.form .buttonRow > div {
+	-webkit-background-clip:padding-box;
+	margin:0;
+	padding:0;
+}
+
+.listContainer.form a.ui-btn {
+	padding:0px;
+}
+
+/* primary button 
+-----------------------------------------------*/
+.listContainer.form .primary,
+.listContainer.form a.primary,
+.listContainer.form .buttonRow > div {
+	border-width:2px;
+	margin:0;
+}
+
+.listContainer.form a.primary .ui-btn-inner,
+.listContainer.form .buttonRow > div > span.ui-btn-inner.ui-btn-corner-all {				/* inner border */
+	border:3px rgba(0, 0, 0, 0.15) solid;
+	padding:13px 22px;
+}
+
+.listContainer.form a.primary.right {						/* make the button align to the right of the row if desired. */
+	float:right;											/* add "right" to the class list on the element */
+}
+
+/* secondary button 
+-----------------------------------------------*/
+.listContainer.form a.secondary {
+	margin:0;
+}
+.listContainer.form a.secondary .ui-btn-inner {
+	padding:16px 24px;
+}
+
+.listContainer.form .ui-field-contain {
+	padding:8px 0px 8px 0px;
+}
+
+.listContainer.form label.checkboxLabel {					/* checkbox label */
+	color:#333;
+	font-size:14px;
+}
+
+/* add background to right arrow of select */
+.listContainer ul li a span span.ui-icon {
+    background-color:rgba(0,0,0,.4);
+    right:0px;
+}
+
+/* position count to left of select down arrow */
+.listContainer ul li a span.ui-li-count {
+    right:38px;
+}
+
+/* text inputs */
+.listContainer.form .textInput {
+	width:95%;
+}
+
+
+.textInput {
+	border:solid 1px rgb(19, 46, 66);
+/*
+	background:#fff -webkit-gradient(linear,50% 1%,50% 100%,
+	color-stop(0, rgba(165, 184, 198, 1)),
+	color-stop(1, rgba(255, 255, 255, 1)));
+*/
+	-webkit-box-shadow:0px 1px 0px rgba(255, 255, 255, 0.4);
+	-webkit-border-radius:5px;
+	-webkit-background-clip:padding-box;
+}
+
+.textInputPlain {
+	border-width:0;
+	background-color:transparent;
+	-webkit-box-shadow:none;
+}
+
+.listContainer.form .ui-input-datebox.ui-shadow-inset.ui-corner-all.ui-body-c {
+	border:solid 1px rgb(19, 46, 66);
+	background-color:#fff;
+	-webkit-box-shadow:0px 1px 0px rgba(255, 255, 255, 0.4);
+	-webkit-border-radius:5px;
+	-webkit-background-clip:padding-box;
+	margin-bottom:4px;
+}
+
+.clear {
+	clear:both;
+}
+
+.centerX {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#error-message {
+	padding:10px 10px 20px 40px;
+	color:#fff;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.7);
+	background:transparent url(../images/icon-error.png) no-repeat 6px 11px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* DETAIL VIEW -  */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+.mc-detail {
+/*	border:solid 2px rgba(171, 188, 201, 0.8);*/
+	border:solid 2px #d0d0d0;
+	background:#fff -webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(.2, #fff),
+	color-stop(0.9, #dedede),
+	color-stop(1, #eee));
+	-webkit-border-radius:5px;
+	padding:8px;
+	font-size:14.5px;
+	margin-bottom:10px;
+	text-shadow:0 -1px 1px #fff;			/* override text shadow color from theme "B" */
+	color:#333;
+}
+
+.mc-detail h3 {
+	color:#333;
+	font-size:14.5px;
+	margin:0;
+	padding:0;
+}
+
+.mc-detail ul {
+	margin:-8px;
+	padding:0;
+}
+
+.mc-detail ul li {
+	border-bottom:1px rgba(0, 0, 0, .3) solid;
+	border-top:1px rgba(255, 255, 255, .7) solid;
+	list-style:none;
+	background-color:transparent;
+	padding:12px 8px;
+	color:#333;
+}
+
+.mc-detail ul li:first-child {
+	border-top-width:0;
+}
+
+.mc-detail ul li:last-child {
+	border-bottom-width:0;
+}
+
+.mc-detail ul li div {
+	float:left;
+}
+
+.mc-detail ul li div:first-child {
+	width:5em;
+	font-weight:normal;
+}
+
+.mc-detail ul li a:link,
+.mc-detail ul li a:visited {
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+.mc-detail ul li a.ui-link:link,
+.mc-detail ul li a.ui-link:visited {
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+/* float for photo display */
+.mc-detail.photo h3,
+.mc-detail.photo div {
+	float:left;
+}
+
+.mc-detail.photo h3 span {
+	font-weight:normal;
+}
+
+.mc-detail.photo div {
+	margin-right:10px;
+}
+
+.mc-detail.photo img[data-icon="student-photo"] {
+	background:transparent url(../images/icon-student-photo.png) no-repeat center 0px;
+    width: 49px;
+    height: 46px;
+}
+
+.mc-detail.photo img[data-icon="faculty-photo"] {
+	background:transparent url(../images/icon-faculty-photo.png) no-repeat center 0px;
+    width: 49px;
+    height: 46px;
+}
+
+.mc-detail.photo img[data-icon="department-photo"] {
+	background:transparent url(../images/icon-department-photo.png) no-repeat center 0px;
+    width: 49px;
+    height: 46px;
+}
+
+.mc-detail  .mc-phone-icon {
+	background:transparent url(../images/icon-phone.png) no-repeat 96% center;
+}
+
+.mc-detail .mc-email-icon {
+	background:transparent url(../images/icon-e-mail.png) no-repeat 96% center;
+}
+
+.mc-detail .mc-email-icon div {
+	width:65%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+.mc-detail .mc-interstate-icon {
+	background:transparent url(../images/icon-interstate.png) no-repeat 96% center;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* "SHOW MORE" NAVIGATION - "Show More" link navigation (prev/next) for top and bottom of list views         */
+/*-----------------------------------------------------------------------------------------------------------*/
+.showMoreLinkTop:link,
+.showMoreLinkTop:visited {
+	text-align:center;
+	background-image:
+    	url(../images/icon-show-more-arrow-up.png),				/* left arrow */
+    	url(../images/icon-show-more-arrow-up.png),				/* right arrow */
+    	 -webkit-gradient(linear,50% -0%,50% 100%,				/* background with shadow */
+    	color-stop(0.6, rgba(230, 230, 230, 1)),
+    	color-stop(0.762283, rgba(228, 228, 228, 1)),
+    	color-stop(0.820735, rgba(221, 221, 221, 1)),
+    	color-stop(0.862409, rgba(210, 210, 210, 1)),
+    	color-stop(0.896107, rgba(193, 193, 193, 1)),
+    	color-stop(0.924984, rgba(171, 171, 171, 1)),
+    	color-stop(0.950549, rgba(143, 143, 143, 1)),
+    	color-stop(0.973674, rgba(111, 111, 111, 1)),
+    	color-stop(0.994225, rgba(75, 75, 75, 1)),
+    	color-stop(1, rgba(63, 63, 63, 1)),
+    	color-stop(1, rgba(0, 0, 0, 1)));
+	background-repeat:no-repeat;
+	background-position:left center, right center, 0 0;
+	margin-bottom:-1px;
+	margin-top:-1px;
+	border-bottom:1px #000 solid;
+	height:24px;
+	padding-top:3px;
+	color:#666 !important;
+}
+
+
+.showMoreLinkBottom:link,
+.showMoreLinkBottom:visited {
+	text-align:center;
+	background-image:
+    	url(../images/icon-show-more-arrow-down.png),			/* left arrow */
+    	url(../images/icon-show-more-arrow-down.png),			/* right arrow */
+    	-webkit-gradient(linear,50% 100%,50% -0%,				/* background with shadow */
+    	color-stop(0.6, rgba(230, 230, 230, 1)),
+    	color-stop(0.762283, rgba(228, 228, 228, 1)),
+    	color-stop(0.820735, rgba(221, 221, 221, 1)),
+    	color-stop(0.862409, rgba(210, 210, 210, 1)),
+    	color-stop(0.896107, rgba(193, 193, 193, 1)),
+    	color-stop(0.924984, rgba(171, 171, 171, 1)),
+    	color-stop(0.950549, rgba(143, 143, 143, 1)),
+    	color-stop(0.973674, rgba(111, 111, 111, 1)),
+    	color-stop(0.994225, rgba(75, 75, 75, 1)),
+    	color-stop(1, rgba(63, 63, 63, 1)),
+    	color-stop(1, rgba(0, 0, 0, 1)));
+	background-repeat:no-repeat;
+	background-position:left center, right center, 0 0;
+	margin-bottom:-1px;
+	margin-top:-1px;
+	border-top:1px #000 solid;
+	height:24px;
+	padding-top:3px;
+	color:#666 !important;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/*  DATEBOX CSS OVERRIDES FOR INLINE PAGE RENDERING  */
+/*-----------------------------------------------------------------------------------------------------------*/
+/* set new border */
+.ui-datebox-container {
+	border:solid 1px rgba(255, 255, 255, 0.11) !important;
+	width:287px;
+}
+
+.ui-datebox-gridheader {									/* header background */
+	border-width:0;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+	height:39px;
+}
+
+.ui-datebox-gridheader h4 {									/* header text */
+	color:#fff;
+	text-shadow:none;
+}
+
+.ui-datebox-griddate-label {								/* date text */
+	color:#fff;
+	text-shadow:none;
+}
+
+.ui-datebox-gridrow { 										/* generic rule */
+	margin:0;	
+}
+
+.ui-datebox-gridrow:first-child {							/* first grid row */ 
+ 	background-image:-webkit-gradient(linear,50% -0%,50% 100%,
+		color-stop(0, rgba(58, 58, 58, 0.5)),
+		color-stop(1, rgba(35, 35, 35, 0.5)));
+	border-top:1px solid rgba(0, 0, 0, 0.5);
+}
+
+.ui-datebox-griddate {										/* day boxes & grid lines */
+	border-right:1px rgba(0, 0, 0, 0.5) solid;
+	border-bottom:1px rgba(0, 0, 0, 0.5) solid;
+	border-left:solid 1px rgba(255, 255, 255, .25);
+	border-top:solid 1px rgba(255, 255, 255, .25);
+	width:39px;
+	height:39px;
+	line-height:39px;
+}
+
+/* hide grid lines on left right top and bottom */
+.ui-datebox-gridrow:last-child .ui-datebox-griddate { border-bottom-width:0; }
+.ui-datebox-gridrow:first-child .ui-datebox-griddate { border-top-width:0; }
+.ui-datebox-griddate:last-child { border-right-width:0; }
+.ui-datebox-griddate:first-child { border-left-width:0; }
+/* remove rounded border */
+.ui-datebox-griddate.ui-corner-all { -webkit-border-radius:0; }
+
+/* set new border radius, background gradient, and shadow */
+.ui-datebox-container.ui-overlay-shadow.ui-corner-all.pop.ui-body-b {
+	background:-webkit-gradient(linear,50% 1%,50% 97%,
+	color-stop(0, rgba(101, 133, 155, 1)),
+	color-stop(1, rgba(38, 83, 114, 1)));
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:0px 0px 6px rgba(0, 0, 0, 0.75);
+}
+
+/* hide input label */
+#lblmydate {
+	position:absolute;
+	left:-1000px;
+}
+
+.ui-datebox-griddate.ui-btn-up-a {						/* remove date button styles */
+	background-image:none;
+	background-color:transparent;
+}
+
+/* month buttons */
+.ui-icon.ui-icon-plus.ui-icon-shadow {
+	background:url(../images/cal-arrow-right.png) no-repeat center center;
+	-webkit-box-shadow:none;
+	background-size:10px 10px;
+}
+
+.ui-icon.ui-icon-minus.ui-icon-shadow {
+	background:url(../images/cal-arrow-left.png) no-repeat center center;
+	-webkit-box-shadow:none;
+	background-size:10px 10px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-width: 767px),
+       only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) and (max-width: 800px) {
+	/* month buttons */
+	.ui-icon.ui-icon-plus.ui-icon-shadow {
+		background:url(../images/cal-arrow-right-2x.png) no-repeat center center;
+		background-size:10px 10px;
+		-webkit-box-shadow:none;
+	}
+	
+	.ui-icon.ui-icon-minus.ui-icon-shadow {
+		background:url(../images/cal-arrow-left-2x.png) no-repeat center center;
+		background-size:10px 10px;
+		-webkit-box-shadow:none;
+	}		   
+}
+
+.ui-datebox-gridminus.ui-btn.ui-btn-up-a.ui-btn-inline.ui-btn-icon-notext.ui-btn-corner-all.ui-shadow,
+.ui-datebox-gridminus.ui-btn.ui-btn-hover-a.ui-btn-inline.ui-btn-icon-notext.ui-btn-corner-all.ui-shadow,
+.ui-datebox-gridplus.ui-btn.ui-btn-up-a.ui-btn-inline.ui-btn-icon-notext.ui-btn-corner-all.ui-shadow,
+.ui-datebox-gridplus.ui-btn.ui-btn-hover-a.ui-btn-inline.ui-btn-icon-notext.ui-btn-corner-all.ui-shadow {
+	background-color:transparent;
+	background-image:none;
+	-webkit-border-radius:0;
+	-webkit-box-shadow:none;
+	border:none;	
+}
+
+.ui-datebox-gridminus .ui-btn-inner.ui-btn-corner-all,
+.ui-datebox-gridplus .ui-btn-inner.ui-btn-corner-all {
+	border:none;
+}
+
+.ui-datebox-griddate.ui-datebox-griddate-empty.ui-datebox-griddate-label {
+	color:rgba(255, 255, 255, 1);
+	padding:4px 0px;
+}
+
+.ui-datebox-griddate.ui-datebox-griddate-empty {
+	color:rgba(255, 255, 255, .5);
+	text-shadow:none;
+}
+
+/* Retina iPhone 4 */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-width: 767px),
+       only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) and (max-width: 800px){
+
+    /* icons */
+    .ui-icon-menu {
+    	background:transparent url(../images/icon-menu-2x.png) no-repeat center 0px;
+    	background-size: 18px 18px;
+    }
+    
+    ul.ui-menu .ui-icon-home {
+    	background:transparent url(../images/icon-home-2x.png) no-repeat center 0px;
+    	background-size: 21px 16px;
+    }
+
+    ul.ui-menu .ui-icon-sign-in,
+    ul.ui-menu .ui-icon-sign-out {
+    	background:transparent url(../images/icon-lock-white-2x.png) no-repeat center 0px;
+    	background-size: 13px 16px;
+    }
+
+    ul.ui-menu .ui-icon-icon-view {
+    	background:transparent url(../images/icon-icon-view-2x.png) no-repeat center 0px;
+    	background-size: 20px 20px;
+    }
+
+    ul.ui-menu .ui-icon-list-view {
+    	background:transparent url(../images/icon-list-view-2x.png) no-repeat center 0px;
+    	background-size: 20px 18px;
+    }
+
+    ul.ui-menu .ui-icon-choose-date {
+    	background:transparent url(../images/icon-events-2x.png) no-repeat center 0px;
+    	background-size: 20px 22px;
+    }
+    
+    /* GLOBAL */
+    .ui-icon-back {
+    	background:transparent url(../images/icon-back-2x.png) no-repeat center center;
+    	background-size: 23px 18px;
+    }
+    
+    [data-role="navbar"] .ui-icon-mc-more {
+    	background:transparent url(../images/icon-more-2x.png) no-repeat center center;
+    	background-size: 23px 5px;
+    }
+
+    [data-role="navbar"] .ui-icon-mc-search {
+    	background:transparent url(../images/icon-search-2x.png) no-repeat center 2px;
+    	background-size: 15px 14px;
+    }
+    
+    #error-message {
+    	background:transparent url(../images/icon-error-2x.png) no-repeat 6px 11px;
+    	background-size: 22px 22px;
+    }
+
+    .mc-detail.photo img[data-icon="student-photo"] {
+    	background:transparent url(../images/icon-student-photo-2x.png) no-repeat center 0px;
+    	background-size: 49px 46px;
+    }
+
+    .mc-detail.photo img[data-icon="faculty-photo"] {
+    	background:transparent url(../images/icon-faculty-photo-2x.png) no-repeat center 0px;
+    	background-size: 49px 46px;
+    }
+
+    .mc-detail.photo img[data-icon="department-photo"] {
+    	background:transparent url(../images/icon-department-photo-2x.png) no-repeat center 0px;
+    	background-size: 49px 46px;
+    }
+
+    .mc-detail  .mc-phone-icon {
+    	background:transparent url(../images/icon-phone-2x.png) no-repeat 96% center;
+    	background-size: 18px 23px;
+    }
+
+    .mc-detail .mc-email-icon {
+    	background:transparent url(../images/icon-e-mail-2x.png) no-repeat 96% center;
+    	background-size: 20px 12px;
+    }
+
+    .mc-detail .mc-interstate-icon {
+    	background:transparent url(../images/icon-interstate-2x.png) no-repeat 96% center;
+    	background-size: 19px 19px;
+    }
+    
+    .showMoreLinkTop:link,
+    .showMoreLinkTop:visited {
+    	background-image:
+        	url(../images/icon-show-more-arrow-up-2x.png),				/* left arrow */
+        	url(../images/icon-show-more-arrow-up-2x.png),				/* right arrow */
+        	 -webkit-gradient(linear,50% -0%,50% 100%,				/* background with shadow */
+        	color-stop(0.6, rgba(230, 230, 230, 1)),
+        	color-stop(0.762283, rgba(228, 228, 228, 1)),
+        	color-stop(0.820735, rgba(221, 221, 221, 1)),
+        	color-stop(0.862409, rgba(210, 210, 210, 1)),
+        	color-stop(0.896107, rgba(193, 193, 193, 1)),
+        	color-stop(0.924984, rgba(171, 171, 171, 1)),
+        	color-stop(0.950549, rgba(143, 143, 143, 1)),
+        	color-stop(0.973674, rgba(111, 111, 111, 1)),
+        	color-stop(0.994225, rgba(75, 75, 75, 1)),
+        	color-stop(1, rgba(63, 63, 63, 1)),
+        	color-stop(1, rgba(0, 0, 0, 1)));
+    }
+
+    .showMoreLinkBottom:link,
+    .showMoreLinkBottom:visited {
+    	background-image:
+        	url(../images/icon-show-more-arrow-down-2x.png),			/* left arrow */
+        	url(../images/icon-show-more-arrow-down-2x.png),			/* right arrow */
+        	-webkit-gradient(linear,50% 100%,50% -0%,				/* background with shadow */
+        	color-stop(0.6, rgba(230, 230, 230, 1)),
+        	color-stop(0.762283, rgba(228, 228, 228, 1)),
+        	color-stop(0.820735, rgba(221, 221, 221, 1)),
+        	color-stop(0.862409, rgba(210, 210, 210, 1)),
+        	color-stop(0.896107, rgba(193, 193, 193, 1)),
+        	color-stop(0.924984, rgba(171, 171, 171, 1)),
+        	color-stop(0.950549, rgba(143, 143, 143, 1)),
+        	color-stop(0.973674, rgba(111, 111, 111, 1)),
+        	color-stop(0.994225, rgba(75, 75, 75, 1)),
+        	color-stop(1, rgba(63, 63, 63, 1)),
+        	color-stop(1, rgba(0, 0, 0, 1)));
+    }
+}

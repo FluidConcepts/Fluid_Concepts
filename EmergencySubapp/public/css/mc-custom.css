@@ -1,0 +1,362 @@
+/* --------------------------------------------------------------------*/
+/* Mobile Connection Swatches                                          */
+/* --------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------*/
+/* MENU - Menu at the top right of the screen inside the header toolbar                                      */
+/*-----------------------------------------------------------------------------------------------------------*/
+.ui-icon-menu {
+    width: 42px;
+    height: 42px;
+    background-size: 24px 24px;
+	background:transparent url(../images/icon-menu.png) no-repeat;
+	/* margin-right: 12px; */
+}
+
+div.ui-menu-icon {
+	width: 60px;
+	height: 60px;
+	/* float:right; */
+	/* margin-top:0px; */
+	/* margin-right:4px; */
+	/* border:0px; */
+}
+/* Our headers are a bit taller than Ellucian's this pushes the buttons down a bit for symmetry. -srt- */
+.ui-header .ui-btn span:not(.ui-btn-corner-all).ui-btn-inner {
+	width:42px;
+	height:42px;
+	margin-top: 2px;
+	/* margin-bottom: 0px;
+	margin-right: 8px; */
+	/* border-bottom: none; */
+	/* border-right:60px; */
+}
+
+/*
+.listContainer ul li a span span.ui-icon {
+	width:44px;
+	height:44px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+}
+*/
+
+/* Get rid of the lines for breaks (used to be 1px) */
+.ui-br {
+    border-top: 0px solid rgba(130, 130, 130, 0.3);
+}
+
+.ui-br {
+    border-bottom: 0px solid rgba(130, 130, 130, 0.3);
+}
+/* Turn off underlining for links */
+a {
+	text-decoration: none;
+}
+
+/* -srt- */
+/* Overriding some options from jquery.mobile */
+/*.ui-mobile, .ui-mobile body { 
+	/* background-color: transparent; */
+	background-color: #61000e; /* matches dark red at the bottom of our gradient */
+}
+*/
+
+.ui-mobile-viewport {  
+	background-color: transparent; 
+}
+
+.ui-mobile-viewport-transitioning,
+.ui-mobile-viewport-transitioning .ui-page {
+	background-color: transparent; 
+}
+
+/* Suggested by our good friend, Brian Resler */
+/* For mysterious reasons this makes the whole app much more seemingly stable in its UI */
+.ui-page {
+	-webkit-backface-visibility: hidden;
+}
+
+/* With a twist because the above was wreaking havoc with the CSS for dialogs like "login" and "error" in 1.3 */
+/* Spooky weird, ain't it? -srt- */
+.ui-dialog {
+    -webkit-backface-visibility: visible;
+}
+
+
+/* for headers */
+.ui-header {
+	height:42px;										/* set header height */
+}
+
+.ui-bar-x {
+	height: 44px;
+	border: 0px solid #000000;
+	color: #ffffff;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #000000;
+	background:url(../images/header_bg.png) repeat;
+}
+
+/* for pages */
+.ui-body-g {
+	background: #b20022; /* Old browsers */
+    background: -moz-linear-gradient(top, #b20022 0%, #a3001e 25%, #6e0012 79%, #60000d 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b20022), color-stop(25%,#a3001e), color-stop(79%,#6e0012), color-stop(100%,#60000d)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* IE10+ */
+    background: linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b20022', endColorstr='#60000d',GradientType=0 ); /* IE6-9 */
+}
+
+/* -srt- */
+.ui-bar-g {
+	background: #99000a;
+}
+
+.listContainer,
+.listContainer ui-btn-up-g {
+	background: #b20022; /* Old browsers */
+    background: -moz-linear-gradient(top, #b20022 0%, #a3001e 25%, #6e0012 79%, #60000d 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b20022), color-stop(25%,#a3001e), color-stop(79%,#6e0012), color-stop(100%,#60000d)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* IE10+ */
+    background: linear-gradient(top, #b20022 0%,#a3001e 25%,#6e0012 79%,#60000d 100%); /* W3C */
+	-webkit-border-radius:5px;
+	-webkit-box-shadow:0px 0px 3px rgba(0, 0, 0, 0.75);
+}
+
+input.ui-input-text, textarea.ui-input-text {
+	background: #ffffff;
+}
+
+/* for footers */
+.ui-bar-z {
+	border: 0px solid #000000;
+	color: #ffffff;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #000000;
+	background:url(../images/footer_bg.png) repeat;
+}
+
+
+.mc-detail {
+	border:solid 2px rgba(171, 188, 201, 0.8);
+	padding:8px;
+	font-size:14.5px;
+	margin-bottom:10px;
+	background: none;
+}
+
+.mc-detail ul li div {
+    padding: 12px 8px;
+}
+
+.mc-detail ul li a:link,
+.mc-detail ul li a:visited {
+	padding: 0px; 
+}
+
+/* iPad in portrait */
+@media only screen and (min-device-width: 768px) and (orientation: portrait) {
+    /* content height */
+	[data-role="content"][class*="fill-vertical"] {
+        min-height:1024px;
+    }
+	/* dialog background height */
+	[data-role="dialog"][class*="ui-page-active"] {
+        height:1004px;
+    }
+    /* content height when there's no footer on the page */
+	[data-role="content"][class*="fill-vertical no-footer"] {
+		min-height:931px;
+	}
+}
+
+/* Force those links in the menu to be white and the proper font! */
+.ui-body-a .ui-link:visited,
+.menu a:visited,
+.menu a:link {
+                color: #ffffff;
+                /* font-weight: bold; */
+				font-family: arial,helvetica,clean,sans-serif;
+				background-color: transparent;
+}
+
+.ui-body-b .ui-link:visited,
+.menu b:visited,
+.menu b:link {
+                color: #ffffff;
+                /* font-weight: bold; */
+				font-family: arial,helvetica,clean,sans-serif;
+}
+
+/* STOLEN FROM /app/Mshell/jquery.mobile-1.1.0 should probably be removed if Theme Roller is ever implemented. -srt- */
+/* This sets the colors of the headers to look like the native Rho toolbars on the iPhone */
+/* (Note there is a section of mshell-custom.css where the iPad's native barbar detail are set.) */
+/* E
+-----------------------------------------------------------------------------------------------------------*/
+/* GLOBAL */
+/* we do this to kill the annoying artifacts that come with the active state of the 'menu' button */
+/* .ui-icon-menu:active {
+	background:transparent url(../images/icon-menu.png) no-repeat left top;
+	width:23px;
+	height:18px;
+	background-size:23px 18px;
+}
+*/
+
+.ui-bar-e {
+	border-top: 1px solid #cdd5f5;
+	border-bottom: 1px solid #2c3643;
+	background: #111111; /*{f-bar-background-color}*/
+	color: #ffffff;
+	font-weight: bold;						/* These font options don't seem to 			*/
+	font-size: 36px;						/* stick. I have to make changes directly to 	*/
+	text-shadow: 0 -1px 1px #444444;		/* jquery.mobile.1.1.0.min.css 	-srt-			*/
+	margin-top:0;
+	margin-bottom:0;
+	background-image:-webkit-gradient(linear,50% 1%,50% 138%,
+		color-stop(0, #afbccd ),
+		color-stop(0.33, #889bb3 ),
+		color-stop(0.34, #8195af ),
+		color-stop(1, #6d84a2));
+}
+
+/* Tablet - don't pick up Galaxy phones with resolution up to 800 */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (orientation: portrait) and (min-width: 768px),
+       only screen and (orientation: landscape) and (min-width: 1024px){
+    /* That damn native Rho navbar it uses one color on the iPad and another on the iPhone -srt- */
+    
+	.ui-bar-e {
+		border-top: 1px solid #ffffff;
+		border-bottom: 1px solid #797f91;
+		background: #afbccd;
+		color: #717880;
+		font-weight: normal;
+		font-size: 36px;
+		text-shadow: 0 -1px #444444, 0 1px #ffffff;
+		margin-top:0;
+		margin-bottom:0;
+		background-image:-webkit-gradient(linear,50% 1%,50% 138%,
+			color-stop(0, #f4f5f7 ),
+			color-stop(1, #a7abb9 )); 
+	}
+	
+}
+/* This is also part of getting the header to look like the Rho native navbar */
+.ui-header .ui-title {
+	margin-top:10px;
+	margin-bottom:8px;
+	font-size:20px;
+}
+.ui-bar-e, 
+.ui-bar-e input, 
+.ui-bar-e select, 
+.ui-bar-e textarea, 
+.ui-bar-e button {
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-bar-e .ui-link-inherit {
+	color: #ffffff /*{f-bar-color}*/;
+}
+.ui-bar-e .ui-link {
+	color: #7cc4e7 /*{f-bar-link-color}*/;
+	font-weight: bold;
+}
+.ui-bar-e .ui-link:hover {
+	color: #2489CE /*{f-bar-link-hover}*/;
+}
+.ui-bar-e .ui-link:active {
+	color: #2489CE /*{f-bar-link-active}*/;
+}
+.ui-bar-e .ui-link:visited {
+    color: #2489CE /*{f-bar-link-visited}*/;
+}
+.ui-body-e,
+.ui-overlay-e {
+	border: 1px solid #2A2A2A /*{f-body-border}*/;
+	background: #222222 /*{f-body-background-color}*/;
+	color: #ffffff /*{f-body-color}*/;
+	text-shadow: 0 /*{f-body-shadow-x}*/ 1px /*{f-body-shadow-y}*/ 0 /*{f-body-shadow-radius}*/ 	#000000 /*{f-body-shadow-color}*/;
+	background-image:-webkit-gradient(linear,50% 1%,50% 138%,
+	color-stop(0, #97979a /*{f-body-background-start}*/),
+	color-stop(1, #000000 /*{f-body-background-end}*/));
+	font-weight: normal;
+}
+.ui-overlay-e {
+	background-image: none;
+	border-width: 0;
+}
+.ui-body-e,
+.ui-body-e input,
+.ui-body-e select,
+.ui-body-e textarea,
+.ui-body-e button {
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-body-e .ui-link-inherit {
+	color: #ffffff /*{f-body-color}*/;
+}
+.ui-body-e .ui-link {
+	color: #ffffff /*{f-body-link-color}*/;
+	font-weight: normal;
+}
+.ui-body-e .ui-link:hover {
+	color: #2489CE /*{f-body-link-hover}*/;
+}
+.ui-body-e .ui-link:active {
+	color: #2489CE /*{f-body-link-active}*/;
+}
+.ui-body-e .ui-link:visited {
+    color: #2489CE /*{f-body-link-visited}*/;
+}
+.ui-btn-up-e {
+	border:1px solid #333333 /*{f-bup-border}*/;
+	background:	transparent /*{f-bup-background-color}*/;
+	font-weight: normal;
+	color: #ffffff /*{f-bup-color}*/;
+	text-shadow: 0 /*{f-bup-shadow-x}*/ -1px /*{f-bup-shadow-y}*/ 1px /*{f-bup-shadow-radius}*/ 	#000000 /*{f-bup-shadow-color}*/;
+	background-image:none;
+}
+.ui-btn-up-e a.ui-link-inherit {
+	color: #ffffff /*{f-bup-color}*/;
+}
+.ui-btn-hover-e {
+	border: 1px solid: #000000 /*{f-bhover-border}*/;
+	background:	rgba(255, 255, 255, .05) /*{f-bhover-background-color}*/;
+	font-weight: normal;
+	color: #ffffff /*{f-bhover-color}*/;
+	text-shadow: 0 /*{f-bhover-shadow-x}*/ -1px /*{f-bhover-shadow-y}*/ 1px /*{f-bhover-shadow-radius}*/ 	#000000 /*{f-bhover-shadow-color}*/;
+	background-image:-webkit-gradient(linear,50% 100%,50% 0%,
+	color-stop(0, rgba(255, 255, 255, .05) /*{f-bhover-background-start}*/),
+	color-stop(1, rgba(255, 255, 255, .01) /*{f-bhover-background-end}*/));
+}
+.ui-btn-hover-e a.ui-link-inherit {
+	color: #ffffff /*{f-bhover-color}*/;
+}
+.ui-btn-down-e {
+	border: 1px solid #000000 /*{f-bdown-border}*/;
+	/* background: #3d3d3d; /*{f-bdown-background-color}*/
+	background: transparent;
+	font-weight: bold;
+	color: #ffffff /*{f-bdown-color}*/;
+	text-shadow: 0 -1px 1px #000000;
+	text-shadow: 0 /*{f-bdown-shadow-x}*/ 1px /*{f-bdown-shadow-y}*/ 0 /*{f-bdown-shadow-radius}*/ 	#000000 /*{f-bdown-shadow-color}*/;
+/*	background-image:-webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(0, #21282d), /*{f-bdown-background-start}*/
+/* 	color-stop(1, #31383c)); /*{f-bdown-background-end}*/
+}
+.ui-btn-down-e a.ui-link-inherit {
+	color: #ffffff /*{f-bdown-color}*/;
+}
+.ui-btn-up-e,
+.ui-btn-hover-e,
+.ui-btn-down-e {
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	text-decoration: none;
+}
+

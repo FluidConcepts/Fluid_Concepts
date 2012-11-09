@@ -1,0 +1,26 @@
+#sdk: "/Users/jaredjohnson/.rvm/gems/ruby-1.9.3-p286/gems/rhodes-3.4.2"
+sdkversion: "3.4.0"
+name: "EmergencySubapp"
+version: 1.0
+vendor: "rhomobile"
+build: "debug"
+bbver: 4.6
+applog: "rholog.txt"
+iphone:
+  configuration: "Release"
+  sdk: "iphonesimulator5.0"
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: "com.rhomobile.emergencysubapp"
+  BundleURLScheme: "emergencysubapp"
+wp:
+  productid: "94ddd140-0c06-0130-1c39-3c07544bac1d"
+symbian:
+  uid: "0xedfb712c"
+android:
+  android_title: 0
+  version: 2.2
+extensions:
+  - json
+  - another-extension

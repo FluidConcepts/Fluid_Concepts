@@ -1,0 +1,44 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :show, :id => @emergency.object %>
+    <h1>Edit <%= @emergency.title%></h1>
+    <%= link_to "Delete", :action => :delete, :id => @emergency.object %>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @emergency.object %>"/>
+      <table>
+          
+          <tr>
+              <td class="itemLabel">Title: </td>
+              <td class="itemValue"><input type="text" name="emergency[title]" value="<%= @emergency.title %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Description: </td>
+              <td class="itemValue"><input type="text" name="emergency[description]" value="<%= @emergency.description %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Time: </td>
+              <td class="itemValue"><input type="text" name="emergency[time]" value="<%= @emergency.time %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Date: </td>
+              <td class="itemValue"><input type="text" name="emergency[date]" value="<%= @emergency.date %>"/></td>
+          </tr>
+          
+          <tr>
+              <td class="itemLabel">Type: </td>
+              <td class="itemValue"><input type="text" name="emergency[type]" value="<%= @emergency.type %>"/></td>
+          </tr>
+          
+      </table>
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>
