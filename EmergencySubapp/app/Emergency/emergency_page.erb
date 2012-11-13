@@ -49,8 +49,8 @@
 	  Alert.show_popup( {
 	  :message => emgs.description, 
 	  :title => emgs.title, 
-	  :icon => '/public/images/icon.png',
-	  :buttons => ["Yes", "No", {:id => 'cancel', :title => 'Cancel'}],
+	  :icon => :info,
+	  :buttons => [:id => 'dismiss', :title => 'Dismiss'],
     :callback => url_for(:action => :on_dissmiss_popup) } )
     %>
 	<% end %>
