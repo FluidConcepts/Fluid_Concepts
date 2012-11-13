@@ -44,7 +44,14 @@
 
 	</head>
 	<body class="ui-body-b">
-	
+	  <%
+	  Alert.show_popup( {
+	  :message => @emergencys[0].description, 
+	  :title => @emergencys[0].title, 
+	  :icon => '/public/images/icon.png',
+	  :buttons => [{:id => 'cancel', :title => 'Cancel'}],
+    :callback => url_for(:action => :on_dissmiss_popup) } )
+    %>
 		<div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false" class="page logged-out" style="padding-top: 44px; padding-bottom: 44px">
 
     <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">
