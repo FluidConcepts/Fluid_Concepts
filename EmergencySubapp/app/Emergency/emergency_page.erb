@@ -44,6 +44,7 @@
 
 	</head>
 	<body class="ui-body-b">
+  <% @emergencys.sort! { |a,b| a.date <=> b.date } %>
 	<% 
 	  if @emergencys.empty?
       Alert.show_popup( {
@@ -71,13 +72,13 @@
 
 		<div data-role="content">
 		<ul data-role="listview">
-			<% @emergencys.each do |emg| %>
-			<li style="color: #FFFFFF;">
-				<h3 style="font-size:200%"><%= emg.title  %></h3>
+		    <% @emergencys.each do |emg| %>
+			  <li style="color: #FFFFFF;">
+				<h3 style="font-size:200%"><%= emg.title %></h3>
 				<p style="font-size:150%"><%= emg.description %></p>
 				<p class="ui-li-aside"><strong><%= emg.date %> <%= emg.time %></strong></p>
+		<% end  %>
 			</li>
-			<% end %>
 		</ul>
 		</div><!-- /content -->
 
