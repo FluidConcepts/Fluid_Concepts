@@ -54,13 +54,16 @@
       :buttons => [:id => 'dismiss', :title => 'Dismiss'],
       :callback => url_for(:action => :on_dissmiss_popup) } )
 	  else
-      @emergencys.each do |emgs|
-         Alert.show_popup( {
-         :message => emgs.description, 
-         :title => emgs.title, 
-         :icon => :info,
-         :buttons => [:id => 'dismiss', :title => 'Dismiss'],
-         :callback => url_for(:action => :on_dissmiss_popup) } )
+      @emergencys.each do |emg|
+        if emg.description[0,1] == '*'
+          emg.update_attributes("description" => '^' + emg.description[1,emg.description.length-1])
+          Alert.show_popup( {
+            :message => emg.description[1,emg.description.length-1], 
+            :title => emg.title, 
+            :icon => :info,
+            :buttons => [:id => 'dismiss', :title => 'Dismiss'],
+            :callback => url_for(:action => :on_dissmiss_popup) } )
+         end
        end 
 	  end
 	%>
@@ -75,7 +78,7 @@
 		    <% @emergencys.each do |emg| %>
 			  <li style="color: #FFFFFF;">
 				<h3 style="font-size:200%"><%= emg.title %></h3>
-				<p style="font-size:150%"><%= emg.description %></p>
+				<p style="font-size:150%"><%= emg.description[1,emg.description.length-1] %></p>
 				<p class="ui-li-aside"><strong><%= emg.date %> <%= emg.time %></strong></p>
 		<% end  %>
 			</li>
