@@ -44,19 +44,19 @@
 
 	</head>
 	<body class="ui-body-b">
-  <% @emergencys.sort! { |a,b| a.date <=> b.date } %>
+  <% @emergencys.sort! { |a,b| b.date <=> a.date } %>
 	<% 
 	  if @emergencys.empty?
       Alert.show_popup( {
-      :message => 'There are currently no active alerts', 
-      :title => 'No alerts', 
-      :icon => :info,
-      :buttons => [:id => 'dismiss', :title => 'Dismiss'],
-      :callback => url_for(:action => :on_dissmiss_popup) } )
+        :message => 'There are currently no active alerts', 
+        :title => 'No alerts', 
+        :icon => :info,
+        :buttons => [:id => 'dismiss', :title => 'Dismiss'],
+        :callback => url_for(:action => :on_dissmiss_popup) } )
 	  else
       @emergencys.each do |emg|
-        if emg.description[0,1] == '*'
-          emg.update_attributes("description" => '^' + emg.description[1,emg.description.length-1])
+        if emg.description[0,1] == '^'
+          emg.update_attributes("description" => '*' + emg.description[1,emg.description.length-1])
           Alert.show_popup( {
             :message => emg.description[1,emg.description.length-1], 
             :title => emg.title, 
