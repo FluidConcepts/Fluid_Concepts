@@ -23,6 +23,7 @@
     <!-- m-App CSS - needed for icon rendering in list-show and icon-show -->
     <link rel="stylesheet" href="../public/css/help.css" />
 
+
   <!-- JavaScript -->
     <!-- JQuery -->
     <script src="../public/jquery/jquery-1.6.4.min.js"></script>
@@ -67,23 +68,33 @@
        end 
 	  end
 	%>
-		<div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false" class="page logged-out" style="padding-top: 44px; padding-bottom: 44px">
+		<div data-role="page" id="help-page" data-cache="false" data-add-back-btn="false" class="page logged-out">
 
     <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">
-      <img data-icon="rumobile" src="../../public/images/blank.gif" class="headerLogo" />
+			<a href="<%= Rho::RhoConfig.start_path %>" data-icon="arrow-l" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+			<h2>RUMobile</h2>
     </div><!-- header -->
 
-		<div data-role="content">
-		<ul data-role="listview">
-		    <% @emergencys.each do |emg| %>
-			  <li style="color: #FFFFFF;">
-				<h3 style="font-size:200%"><%= emg.title %></h3>
-				<p style="font-size:150%"><%= emg.description[1,emg.description.length-1] %></p>
+	<div data-role="content" class="content" data-theme="h">
+	<ul data-role="listview" data-inset="true">
+		<li style="color:white;background-color:#000066;color:#fff;">RU Alerts</li>
+		<% if @emergencys.empty? %>
+				<li style="color:#000;background-color:#fff;"><h3>No Current Alerts</h3>
+				<p>There are currently no recent alerts.</p>
+				</li>
+		<% else %>
+			<% @emergencys.each do |emg| %>
+			<a href="<%= url_for :action => :show, :id => emg.object %>">
+				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
+				<p><%= emg.description %></p>
 				<p class="ui-li-aside"><strong><%= emg.date %> <%= emg.time %></strong></p>
-		<% end  %>
-			</li>
-		</ul>
-		</div><!-- /content -->
+				</li></a>
+			<% end %>
+		<% end %>
+	</ul>
+
+	</div><!-- /content -->
+
 
     <div data-role="footer" data-theme="z" id="icon-mshell-show-page" data-position="fixed">
       <img data-icon="ru" src="../../public/images/blank.gif" class="footerLogo">

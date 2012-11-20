@@ -1,44 +1,16 @@
 <div data-role="page" data-add-back-btn="false">
 
-  <div data-role="header" data-position="inline">
+  <div data-role="header" data-position="inline" data-theme="x">
     <h1><%= @emergency.title %></h1>
-    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="arrow-l" data-direction="reverse">
+    <a href="<%= url_for :controller => :Emergency, :action => :emergency_page  %>" class="ui-btn-left" data-theme="b" data-icon="arrow-l" data-direction="reverse">
       Back
-    </a>
-    <a href="<%= url_for :action => :edit, :id => @emergency.object %>" class="ui-btn-right" data-icon="star">
-      Edit
     </a>
   </div>
 
   <div data-role="content">
-    <ul data-role="listview">
-      
-          <li>
-            <div class="itemLabel">Title</div>
-            <div class="itemValue"><%= @emergency.title %></div>
-          </li>
-      
-          <li>
-            <div class="itemLabel">Description</div>
-            <div class="itemValue"><%= @emergency.description %></div>
-          </li>
-      
-          <li>
-            <div class="itemLabel">Time</div>
-            <div class="itemValue"><%= @emergency.time %></div>
-          </li>
-      
-          <li>
-            <div class="itemLabel">Date</div>
-            <div class="itemValue"><%= @emergency.date %></div>
-          </li>
-      
-          <li>
-            <div class="itemLabel">Type</div>
-            <div class="itemValue"><%= @emergency.type %></div>
-          </li>
-      
-    </ul>
+		<h2><%= @emergency.title %></h3>
+		<h3><%= @emergency.time %> <%= @emergency.date %></h2>
+		<p><%= @emergency.description %></p>
   </div>
 
 </div>
