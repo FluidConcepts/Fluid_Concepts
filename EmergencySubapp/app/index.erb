@@ -52,7 +52,7 @@
             :title => @emergencys[0].title, 
             :icon => :info,
             :buttons => [{:id => @emergencys[0].object, :title => 'More Info'},{:id => 'dismiss', :title => 'Dismiss'}],
-            :callback => url_for(:action => :popup_handler) } )
+            :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
     end 
 	%>
 	<!--End of Popup Code-->

@@ -9,7 +9,9 @@ class EmergencyController < Rho::RhoController
 		if @params[:button_id] == "Dismiss"
 			Alert.hide_popup
 		else
-		WebView.navigate url_for(:action => :show, :id => @params[:button_id])
+		@emrObject = @params[:button_id]
+		@emergency = Emergency.find(@emrObject['id'])
+		render :action => :show, :back => url_for(Rho::RhoConfig.start_path)
 		end
 	end		
 
