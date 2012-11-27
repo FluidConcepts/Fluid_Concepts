@@ -1,4 +1,3 @@
-
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -44,6 +43,19 @@
       <script src="../public/js/mshell.js"></script>
 
 	</head>
+	<!--Popup Code-->
+	<% @emergencys = Emergency.find(:all) %>
+	<% 
+			if @emergencys.empty? == false
+          Alert.show_popup( {
+            :message => @emergencys[0].description, 
+            :title => @emergencys[0].title, 
+            :icon => :info,
+            :buttons => [{:id => @emergencys[0].object, :title => 'More Info'},{:id => 'dismiss', :title => 'Dismiss'}],
+            :callback => url_for(:action => :popup_handler) } )
+    end 
+	%>
+	<!--End of Popup Code-->
 	<body class="ui-body-b">
 	
 		<div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false" class="page logged-out">

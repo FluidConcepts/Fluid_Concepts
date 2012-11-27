@@ -45,24 +45,6 @@
 
 	</head>
 	<body class="ui-body-b">
-  <% @emergencys.sort! { |a,b| b.date <=> a.date } %>
-	<% 
-	  if @emergencys.empty?
-      Alert.show_popup( {
-        :message => 'There are currently no active alerts', 
-        :title => 'No alerts', 
-        :icon => :info,
-        :buttons => [:id => 'dismiss', :title => 'Dismiss'],
-        :callback => url_for(:action => :on_dissmiss_popup) } )
-	  else
-          Alert.show_popup( {
-            :message => @emergencys[0].description, 
-            :title => @emergencys[0].title, 
-            :icon => :info,
-            :buttons => [:id => 'dismiss', :title => 'Dismiss'],
-            :callback => url_for(:action => :on_dissmiss_popup) } )
-    end 
-	%>
 		<div data-role="page" id="help-page" data-cache="false" data-add-back-btn="false" class="page logged-out">
 
     <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">

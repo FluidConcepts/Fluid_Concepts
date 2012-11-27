@@ -5,6 +5,14 @@ require 'helpers/emergency_helper'
 class EmergencyController < Rho::RhoController
   include BrowserHelper
 
+	def popup_handler
+		if @params[:button_id] == "Dismiss"
+			Alert.hide_popup
+		else
+		WebView.navigate url_for(:action => :show, :id => @params[:button_id])
+		end
+	end		
+
 	def emergency_page
 		@emergencys = Emergency.find(:all)
 	end
