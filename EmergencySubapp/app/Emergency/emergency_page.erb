@@ -55,18 +55,13 @@
         :buttons => [:id => 'dismiss', :title => 'Dismiss'],
         :callback => url_for(:action => :on_dissmiss_popup) } )
 	  else
-      @emergencys.each do |emg|
-        if emg.description[0,1] == '^'
-          emg.update_attributes("description" => '*' + emg.description[1,emg.description.length-1])
           Alert.show_popup( {
-            :message => emg.description[1,emg.description.length-1], 
-            :title => emg.title, 
+            :message => @emergencys[0].description, 
+            :title => @emergencys[0].title, 
             :icon => :info,
             :buttons => [:id => 'dismiss', :title => 'Dismiss'],
             :callback => url_for(:action => :on_dissmiss_popup) } )
-         end
-       end 
-	  end
+    end 
 	%>
 		<div data-role="page" id="help-page" data-cache="false" data-add-back-btn="false" class="page logged-out">
 
