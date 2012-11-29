@@ -1,8 +1,8 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
-#require 'open-uri'
-#require 'rss'
+require '/lib/open-uri'
+require '/lib/rss'
 
 class EmergencyController < Rho::RhoController
   include BrowserHelper

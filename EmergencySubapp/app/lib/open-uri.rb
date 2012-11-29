@@ -1,6 +1,7 @@
-require 'uri'
-require 'stringio'
+require '/lib/uri'
 require 'time'
+require '/lib/stringio'
+
 
 module Kernel
   private

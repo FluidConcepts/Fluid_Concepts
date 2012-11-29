@@ -1,4 +1,4 @@
-require "rss/utils"
+require "/lib/rss/utils"
 
 module RSS
   module XML

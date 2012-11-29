@@ -46,10 +46,10 @@ class Time
 end
 
 
-require "English"
-require "rss/utils"
-require "rss/converter"
-require "rss/xml-stylesheet"
+require "/lib/English"
+require "/lib/rss/utils"
+require "/lib/rss/converter"
+require "/lib/rss/xml-stylesheet"
 
 module RSS
 

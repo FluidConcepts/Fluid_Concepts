@@ -16,6 +16,7 @@ rhobundle_zip_pwd = nil
 # for production set to 3
 MinSeverity  = 1 
 
+
 # enable copy log messages to standard output, useful for debugging
 LogToOutput = 1
 
