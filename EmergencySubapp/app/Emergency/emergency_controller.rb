@@ -1,8 +1,8 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
-require 'open-uri'
-require 'rss'
+#require 'open-uri'
+#require 'rss'
 
 class EmergencyController < Rho::RhoController
   include BrowserHelper
@@ -22,7 +22,7 @@ class EmergencyController < Rho::RhoController
 		end
 	end		
 	
-	# Get rss feed
+	# Get rss feed (This is currently broken)
 	def refresh_database
 	  Emergency.delete_all()
     url = 'https://php.radford.edu/~softeng02/rss-sim/rss.php'
