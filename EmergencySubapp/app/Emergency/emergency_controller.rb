@@ -1,6 +1,7 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
+require 'rss'
 
 class EmergencyController < Rho::RhoController
   include BrowserHelper
