@@ -44,7 +44,7 @@
 
 	</head>
 	<!--Popup Code-->
-	<% @emergencys = Emergency.find(:all) %>
+	<% @emergencys = Emergency.find(:all, :conditions =>{'type' => 'notseen'}) %>
 	<%
 			if @emergencys.empty? == false
           Alert.show_popup( {
@@ -53,7 +53,11 @@
             :icon => :info,
             :buttons => [{:id => @emergencys[0].title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
             :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-    end 
+            
+     @emergencys.each do |emg|
+     emg.update_attributes({'type' => 'seen'})
+     end
+     end 
 	%>
 	<!--End of Popup Code-->
 	<body class="ui-body-b">
