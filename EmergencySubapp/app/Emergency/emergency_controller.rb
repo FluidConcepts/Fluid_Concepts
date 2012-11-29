@@ -1,10 +1,13 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
+require 'open-uri'
+require 'rss'
 
 class EmergencyController < Rho::RhoController
   include BrowserHelper
-
+  
+  # Handle popup events
 	def popup_handler
 		title = @params['button_id']
 		if title == "Dismiss"
@@ -18,7 +21,20 @@ class EmergencyController < Rho::RhoController
      end 
 		end
 	end		
-
+	
+	# Get rss feed
+	def refresh_database
+	  Emergency.delete_all()
+    url = 'https://php.radford.edu/~softeng02/rss-sim/rss.php'
+    open(url) do |rss|
+      feed = RSS::Parser.parse(rss)
+      feed.items.each do |item|
+        puts "Item: #{item.title}"
+      end
+    end
+	end
+	
+	# Find all emergencys
 	def emergency_page
 		@emergencys = Emergency.find(:all)
 	end

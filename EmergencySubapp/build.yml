@@ -21,6 +21,4 @@ symbian:
 android:
   android_title: 0
   version: 2.2
-extensions:
-  - json
-  - another-extension
+extensions: ["open-uri", "rss"]
