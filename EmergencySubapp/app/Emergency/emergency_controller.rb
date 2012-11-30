@@ -4,6 +4,7 @@ require 'helpers/emergency_helper'
 require 'rexml/document'
 class EmergencyController < Rho::RhoController
   include BrowserHelper
+  include REXML
   
   # Handle popup events
 	def popup_handler
@@ -23,7 +24,7 @@ class EmergencyController < Rho::RhoController
 	# Get rss feed (This is currently broken)
 	def refresh_database
 	  Emergency.delete_all()
-	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.txt")
+	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
       :filename => @@rssfile,
@@ -36,8 +37,11 @@ class EmergencyController < Rho::RhoController
 	# Do this on download complete
 	def httpdownload_callback
     file = File.new(@@rssfile)
-    puts file
-    doc = REXML::Document.new file
+    doc = REXML::Document.new(file)
+    doc.elements.each("*/channel/item")do |elm|
+      str = elm.elements["pubDate"]
+      Emergency.create({ "title" => elm.elements["title"], "description" => elm.elements["description"], "date" => str})
+    end
     
 	end
 	
