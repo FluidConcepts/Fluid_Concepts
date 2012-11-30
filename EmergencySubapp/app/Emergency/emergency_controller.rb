@@ -1,9 +1,7 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
-require '/lib/open-uri'
-require '/lib/rss'
-
+require 'rexml/document'
 class EmergencyController < Rho::RhoController
   include BrowserHelper
   
@@ -15,9 +13,9 @@ class EmergencyController < Rho::RhoController
 		else
 		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
       if @emergency.empty? == false
-	  	WebView.navigate(url_for :action => :show, :id => @emergency[0].object)
+	  	WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
      else
-      WebView.navigate(url_for :action => :index)
+      WebView.navigate(url_for( :action => :index ))
      end 
 		end
 	end		
@@ -25,13 +23,22 @@ class EmergencyController < Rho::RhoController
 	# Get rss feed (This is currently broken)
 	def refresh_database
 	  Emergency.delete_all()
-    url = 'https://php.radford.edu/~softeng02/rss-sim/rss.php'
-    open(url) do |rss|
-      feed = RSS::Parser.parse(rss)
-      feed.items.each do |item|
-        puts "Item: #{item.title}"
-      end
-    end
+	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.txt")
+    Rho::AsyncHttp.download_file(
+      :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
+      :filename => @@rssfile,
+      :headers => {},
+      :callback => url_for(:action => :httpdownload_callback)
+    )
+    redirect :emergency_page
+	end
+	
+	# Do this on download complete
+	def httpdownload_callback
+    file = File.new(@@rssfile)
+    puts file
+    doc = REXML::Document.new file
+    
 	end
 	
 	# Find all emergencys

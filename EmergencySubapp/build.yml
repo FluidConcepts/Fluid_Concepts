@@ -21,4 +21,4 @@ symbian:
 android:
   android_title: 0
   version: 2.2
-extensions:
+extensions: ["rexml", "set"]

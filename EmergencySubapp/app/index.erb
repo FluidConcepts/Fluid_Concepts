@@ -45,7 +45,7 @@
 	</head>
 	<!--Popup Code-->
 	<% @emergencys = Emergency.find(:all) %>
-	<%
+	<%#
 			if @emergencys.empty? == false
           Alert.show_popup( {
             :message => @emergencys[0].description, 
