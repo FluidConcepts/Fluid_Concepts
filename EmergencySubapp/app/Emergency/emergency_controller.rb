@@ -31,6 +31,7 @@ class EmergencyController < Rho::RhoController
       :headers => {},
       :callback => url_for(:action => :httpdownload_callback)
     )
+    sleep(1)
     redirect :emergency_page
 	end
 	
@@ -42,7 +43,6 @@ class EmergencyController < Rho::RhoController
       str = elm.elements["pubDate"]
       Emergency.create({ "title" => elm.elements["title"], "description" => elm.elements["description"], "date" => str})
     end
-    
 	end
 	
 	# Find all emergencys
