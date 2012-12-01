@@ -1,11 +1,10 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
 require 'helpers/emergency_helper'
-#require 'open-uri'
-#require 'rss'
-
+require 'rexml/document'
 class EmergencyController < Rho::RhoController
   include BrowserHelper
+  include REXML
   
   # Handle popup events
 	def popup_handler
@@ -15,22 +14,38 @@ class EmergencyController < Rho::RhoController
 		else
 		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
       if @emergency.empty? == false
-	  	WebView.navigate(url_for :action => :show, :id => @emergency[0].object)
+	  	WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
      else
-      WebView.navigate(url_for :action => :index)
+      WebView.navigate(url_for( :action => :index ))
      end 
 		end
 	end		
 	
-	# Get rss feed (This is currently broken)
+	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
 	  Emergency.delete_all()
-    url = 'https://php.radford.edu/~softeng02/rss-sim/rss.php'
-    open(url) do |rss|
-      feed = RSS::Parser.parse(rss)
-      feed.items.each do |item|
-        puts "Item: #{item.title}"
-      end
+	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
+    Rho::AsyncHttp.download_file(
+      :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
+      :filename => @@rssfile,
+      :headers => {},
+      :callback => url_for(:action => :httpdownload_callback)
+    )
+	  sleep(2)
+	  redirect :emergency_page
+	end
+	
+	# Do this on download complete
+	# Update the database
+	def httpdownload_callback
+    file = File.new(@@rssfile)
+    doc = REXML::Document.new(file)
+    doc.elements.each("*/channel/item")do |elm|
+      title = elm.elements["title"].text
+      desc = elm.elements["description"].text
+      date_time = elm.elements["pubDate"].text
+      date_array = [date_time[0..16], date_time[16..date_time.length-6]]
+      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0]})
     end
 	end
 	

@@ -7,3 +7,6 @@ sim-*
 bin/
 /rhosimulator
 /last_bbver
+/feed.txt
+/feed.xml
+/feed
