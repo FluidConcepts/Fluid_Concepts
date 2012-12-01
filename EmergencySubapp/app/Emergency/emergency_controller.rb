@@ -45,7 +45,7 @@ class EmergencyController < Rho::RhoController
       desc = elm.elements["description"].text
       date_time = elm.elements["pubDate"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
-      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0]})
+      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "notseen"})
     end
 	end
 	
