@@ -21,7 +21,7 @@ class EmergencyController < Rho::RhoController
 		end
 	end		
 	
-	# Get rss feed (This is currently broken)
+	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
 	  Emergency.delete_all()
 	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
@@ -31,17 +31,20 @@ class EmergencyController < Rho::RhoController
       :headers => {},
       :callback => url_for(:action => :httpdownload_callback)
     )
-    sleep(1)
-    redirect :emergency_page
+	  sleep(2)
+	  redirect :emergency_page
 	end
 	
 	# Do this on download complete
+	# Update the database
 	def httpdownload_callback
     file = File.new(@@rssfile)
     doc = REXML::Document.new(file)
     doc.elements.each("*/channel/item")do |elm|
-      str = elm.elements["pubDate"]
-      Emergency.create({ "title" => elm.elements["title"], "description" => elm.elements["description"], "date" => str})
+      title = elm.elements["title"].text
+      desc = elm.elements["description"].text
+      date_time = elm.elements["pubDate"].text
+      Emergency.create({ "title" => title, "description" => desc, "date" => date_time})
     end
 	end
 	
