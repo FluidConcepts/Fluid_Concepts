@@ -25,6 +25,12 @@ class EmergencyController < Rho::RhoController
 	def refresh_database
 	  Emergency.delete_all()
 	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
+	  if File.exists?(@@rssfile)
+	    @@fileSize = File.size(@@rssfile)
+	    File.delete(@@rssfile)
+	  else
+	    @@filesize = 0
+	  end
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
       :filename => @@rssfile,
@@ -45,8 +51,13 @@ class EmergencyController < Rho::RhoController
       desc = elm.elements["description"].text
       date_time = elm.elements["pubDate"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
-      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "notseen"})
+      if File.size(@@rssfile) > @@fileSize
+        Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "notseen"})
+      else
+        Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "seen"})
+      end
     end
+    file.close
 	end
 	
 	# Find all emergencys
