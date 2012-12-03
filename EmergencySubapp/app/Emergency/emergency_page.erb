@@ -57,7 +57,8 @@
 		<li style="color:white;background-color:#000066;color:#fff;">RU Alerts</li>
 		<% if @emergencys.empty? %>
 				<li style="color:#000;background-color:#fff;"><h3>No Current Alerts</h3>
-				<p>There are currently no recent alerts.</p>
+				<p>There are currently no recent alerts. If you have additional questions, please call the Office of Emergency Preparedness at (540) 831-7155
+        or (540) 831-6696</p>
 				</li>
 		<% else %>
 			<% @emergencys.each do |emg| %>
@@ -70,8 +71,9 @@
 		<% end %>
 	</ul>
 		<div data-role="button" data-theme="b">
-		<a href="<%= :refresh_database %>"> Refresh </a>
+		<a href="<%= url_for(:action => :refresh_database) %>"> Refresh </a>
 		</div>
+    </div>
     <div data-role="footer" data-theme="z" id="icon-mshell-show-page" data-position="fixed">
       <img data-icon="ru" src="../../public/images/blank.gif" class="footerLogo">
     </div><!-- footer -->
