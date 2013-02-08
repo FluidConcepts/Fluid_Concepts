@@ -23,17 +23,19 @@ class EmergencyController < Rho::RhoController
 	
 	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
-	  Emergency.delete_all()
-	  @@rssfile = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
-	  if File.exists?(@@rssfile)
-	    @@fileSize = File.size(@@rssfile)
-	    File.delete(@@rssfile)
-	  else
-	    @@filesize = 0
+	  @emergencys = Emergency.find(:all)
+	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")) 
+	    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+      f.flock(File::LOCK_EX)
+      f.write(@emergencys[0].date + "meh")
+      f.close
+	  }
 	  end
+	  Emergency.delete_all()
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
-      :filename => @@rssfile,
+      :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
       :headers => {},
       :callback => url_for(:action => :httpdownload_callback)
     )
@@ -44,17 +46,22 @@ class EmergencyController < Rho::RhoController
 	# Do this on download complete
 	# Update the database
 	def httpdownload_callback
-    file = File.new(@@rssfile)
+    file = File.new(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
     doc = REXML::Document.new(file)
+    firstLoop = true
     doc.elements.each("*/channel/item")do |elm|
       title = elm.elements["title"].text
       desc = elm.elements["description"].text
       date_time = elm.elements["pubDate"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
-      if File.size(@@rssfile) > @@fileSize
-        Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "notseen"})
-      else
-        Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "type" => "seen"})
+      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => date_time})
+      if(firstLoop)
+        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+          f.flock(File::LOCK_EX)
+          f.write(date_time)
+          f.close
+          firstLoop = false
+        }
       end
     end
     file.close

@@ -44,20 +44,35 @@
 
 	</head>
 	<!--Popup Code-->
-	<% @emergencys = Emergency.find(:all, :conditions =>{'type' => 'notseen'}) %>
 	<%
-			if @emergencys.empty? == false
+	    @emergencys = Emergency.find(:all)
+      if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+        File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+           f.flock(File::LOCK_EX)
+           @value = f.read()
+           f.close
+         }
+      end
+      Emergency.delete_all
+      Rho::AsyncHttp.download_file(
+        :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
+        :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
+        :headers => {},
+        :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback)
+      )
+      sleep(2)
+      @emergencys = Emergency.find(:all)
+			if (!@emergencys.empty?)
+			  if(!@emergencys[0].fullTime == @value)
           Alert.show_popup( {
             :message => @emergencys[0].description, 
             :title => @emergencys[0].title, 
             :icon => :info,
             :buttons => [{:id => @emergencys[0].title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
             :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-            
-     @emergencys.each do |emg|
-     emg.update_attributes({'type' => 'seen'})
-     end
-     end 
+        end
+      end 
 	%>
 	<!--End of Popup Code-->
 	<body class="ui-body-b">
