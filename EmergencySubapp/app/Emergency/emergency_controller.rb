@@ -12,13 +12,13 @@ class EmergencyController < Rho::RhoController
 		if title == "Dismiss"
 			Alert.hide_popup
 		else
-		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
-      if @emergency.empty? == false
-	  	WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
-     else
-      WebView.navigate(url_for( :action => :index ))
-     end 
 		end
+		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
+    if @emergency.empty? == false
+      redirect (url_for( :action => :show, :id => @emergency[0].object))
+    else
+      redirect (url_for( :action => :index ))
+    end 
 	end		
 	
 	# Get rss feed and save to feed.xml in the app storage path
@@ -27,12 +27,10 @@ class EmergencyController < Rho::RhoController
 	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
 	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")) 
 	    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-      f.flock(File::LOCK_EX)
-      f.write(@emergencys[0].date + "meh")
-      f.close
-	  }
+	      f.flock(File::LOCK_EX)
+	     # f.write(@emergencys[0].date + "meh")
+	      f.close}
 	  end
-	  Emergency.delete_all()
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
       :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
@@ -46,6 +44,7 @@ class EmergencyController < Rho::RhoController
 	# Do this on download complete
 	# Update the database
 	def httpdownload_callback
+    Emergency.delete_all()
     file = File.new(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
     doc = REXML::Document.new(file)
     firstLoop = true
@@ -55,14 +54,14 @@ class EmergencyController < Rho::RhoController
       date_time = elm.elements["pubDate"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
       Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => date_time})
-      if(firstLoop)
-        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-          f.flock(File::LOCK_EX)
-          f.write(date_time)
-          f.close
-          firstLoop = false
-        }
-      end
+#      if(firstLoop)
+#        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+#          f.flock(File::LOCK_EX)
+#          f.write(@@value)
+#          f.close
+#          firstLoop = false
+#        }
+#      end
     end
     file.close
 	end

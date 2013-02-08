@@ -2,7 +2,6 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<!-- so once bookmarked the page will appear as an app and wont show the url area. -->
-	
 	<!-- CSS -->
 		<!-- JQuery Mobile CSS -->
 		<link rel="stylesheet" href="../public/jqmobile/jquery.mobile-1.0.1.css" />
@@ -44,35 +43,38 @@
 
 	</head>
 	<!--Popup Code-->
-	<%
-	    @emergencys = Emergency.find(:all)
-      if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
-        File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+  <%
+    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+      f.flock(File::LOCK_EX)
+      @@value = f.read()
+      f.close}
+    if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+      File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+    end
+    Rho::AsyncHttp.download_file(
+      :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
+      :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
+      :headers => {},
+      :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback))
+    sleep(10)
+    @emergency = Emergency.find(:first)
+    
+    if(@emergency != nil)
+      if(!@emergency.fullTime.eql?(@@value))
+        Alert.show_popup( {
+          :message => @emergency.description, 
+          :title => @emergency.title, 
+          :icon => :info,
+          :buttons => [{:id => @emergency.title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
+          :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
         File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-           f.flock(File::LOCK_EX)
-           @value = f.read()
-           f.close
-         }
+          f.flock(File::LOCK_EX)
+          f.write(@emergency.fullTime)
+          f.close}
+      else
+        Alert.show_popup({:message => "Time difference not detected"})
       end
-      Emergency.delete_all
-      Rho::AsyncHttp.download_file(
-        :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
-        :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
-        :headers => {},
-        :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback)
-      )
-      sleep(2)
-      @emergencys = Emergency.find(:all)
-			if (!@emergencys.empty?)
-			  if(!@emergencys[0].fullTime == @value)
-          Alert.show_popup( {
-            :message => @emergencys[0].description, 
-            :title => @emergencys[0].title, 
-            :icon => :info,
-            :buttons => [{:id => @emergencys[0].title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
-            :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-        end
-      end 
+    end 
 	%>
 	<!--End of Popup Code-->
 	<body class="ui-body-b">
