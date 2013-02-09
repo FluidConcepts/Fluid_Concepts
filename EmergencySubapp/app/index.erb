@@ -56,25 +56,26 @@
       :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
       :headers => {},
       :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback))
-    sleep(10)
-    @emergency = Emergency.find(:first)
-    
-    if(@emergency != nil)
-      if(!@emergency.fullTime.eql?(@@value))
-        Alert.show_popup( {
-          :message => @emergency.description, 
-          :title => @emergency.title, 
-          :icon => :info,
-          :buttons => [{:id => @emergency.title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
-          :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-          f.flock(File::LOCK_EX)
-          f.write(@emergency.fullTime)
-          f.close}
-      else
-        Alert.show_popup({:message => "Time difference not detected"})
-      end
-    end 
+    t1 = Thread.new do
+      sleep(5)
+      @emergency = Emergency.find(:first)
+      if(@emergency != nil)
+        if(!@emergency.fullTime.eql?(@@value))
+          Alert.show_popup( {
+            :message => @emergency.description, 
+            :title => @emergency.title, 
+            :icon => :info,
+            :buttons => [{:id => @emergency.title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
+            :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
+          File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
+            f.flock(File::LOCK_EX)
+            f.write(@emergency.fullTime)
+            f.close}
+        else
+          Alert.show_popup({:message => "Time difference not detected"})
+        end
+      end 
+    end
 	%>
 	<!--End of Popup Code-->
 	<body class="ui-body-b">
