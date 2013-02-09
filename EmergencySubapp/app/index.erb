@@ -44,35 +44,50 @@
 	</head>
 	<!--Popup Code-->
   <%
-    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-      f.flock(File::LOCK_EX)
-      @@value = f.read()
-      f.close}
+    # Open the file containing the information of the last update that was displayed and store 
+    # it in value.
+    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), 
+      File::RDWR|File::CREAT){ |f|
+        f.flock(File::LOCK_EX)
+        @@value = f.read()
+        f.close
+      }
+      
+    # Destroy feed.xml if it exists. We dont want our file to write improperly.
     if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
       File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
     end
+    
+    # Download the new XML file representing the rss feed. On download complete callback in 
+    # emergency_controller will parse the XML and update the database.
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
       :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
       :headers => {},
       :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback))
+    # Start a new thread that will sleep for 5 seconds to allow parsing to complete and then 
+    # check the database for to see if there is a new alert. 
     t1 = Thread.new do
-      sleep(5)
-      @emergency = Emergency.find(:first)
-      if(@emergency != nil)
-        if(!@emergency.fullTime.eql?(@@value))
+      sleep(5)                                 # Allow database update to complete 
+      @emergency = Emergency.find(:first)      # Get the newly update database
+      if(@emergency != nil)                    # Can't display popup with no alerts
+        if(!@emergency.fullTime.eql?(@@value)) # Only show popup if the newest hasnt been shown
+          # Show the popup
           Alert.show_popup( {
             :message => @emergency.description, 
             :title => @emergency.title, 
             :icon => :info,
-            :buttons => [{:id => @emergency.title, :title => 'More Info'},{:id => 'Dismiss', :title => 'Dismiss'}],
+            :buttons => [{:id => @emergency.title, :title => 'More Info'},
+              {:id => 'Dismiss', :title => 'Dismiss'}],
             :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-          File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-            f.flock(File::LOCK_EX)
-            f.write(@emergency.fullTime)
-            f.close}
-        else
-          Alert.show_popup({:message => "Time difference not detected"})
+          # Write the full date and time of the shown popup to the last.txt file. We use this above
+          # to filter seen popups.    
+          File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), 
+            File::RDWR|File::CREAT){ |f|
+              f.flock(File::LOCK_EX)
+              f.write(@emergency.fullTime)      
+              f.close
+            }
         end
       end 
     end

@@ -6,10 +6,12 @@ class EmergencyController < Rho::RhoController
   include BrowserHelper
   include REXML
   
-  # Handle popup events
+  # Handle popup events.
+  # ** This is currently broken. In the event user clicks  more info the color scheme 
+  # ** and layout stop functioning correctly.
 	def popup_handler
 		title = @params['button_id']
-		if title == "Dismiss"
+		if title == "Dismiss"               
 			Alert.hide_popup
 		else
 		end
@@ -54,14 +56,6 @@ class EmergencyController < Rho::RhoController
       date_time = elm.elements["pubDate"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
       Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => date_time})
-#      if(firstLoop)
-#        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-#          f.flock(File::LOCK_EX)
-#          f.write(@@value)
-#          f.close
-#          firstLoop = false
-#        }
-#      end
     end
     file.close
 	end
