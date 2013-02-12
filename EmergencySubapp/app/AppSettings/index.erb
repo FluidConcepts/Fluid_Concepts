@@ -1,27 +1,98 @@
-<div data-role="page">
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<!-- so once bookmarked the page will appear as an app and wont show the url area. -->
+	
+	<!-- CSS -->
+		<!-- JQuery Mobile CSS -->
+		<link rel="stylesheet" href="../public/jqmobile/jquery.mobile-1.0.1.css" />
+		
+		<link rel="stylesheet" href="../public/jqmobile/jquery.mobile.datebox-1.0.1.min.css" />
 
-	<div data-role="header" data-position="inline">
-    <h1>AppSettingses</h1>
-    <a href="<%= Rho::RhoConfig.start_path %>" class="ui-btn-left" data-icon="home" data-direction="reverse" <%= "data-ajax='false'" if is_bb6 %>>
-      Home
-    </a>
-    <a href="<%= url_for :action => :new %>" class="ui-btn-right" data-icon="plus">
-      New
-    </a>
+    <!-- Mobile Connection Theme CSS -->
+    <link rel="stylesheet" href="../public/jqmobile/mc-theme.css"/>
+
+    <!-- Mobile Connection Layout CSS -->
+    <link rel="stylesheet" href="../public/css/mc.css" />
+    <link rel="stylesheet" href="../public/css/mc-custom.css" />
+
+    <!-- Mshell CSS -->
+    <link rel="stylesheet" href="../public/css/mshell.css" /> 
+    <link rel="stylesheet" href="../public/css/mshell-custom.css" />
+
+    <!-- m-App CSS - needed for icon rendering in list-show and icon-show -->
+    <link rel="stylesheet" href="../public/css/help.css" />
+
+
+  <!-- JavaScript -->
+
+    <!-- JQuery -->
+    <script src="../public/jquery/jquery-1.6.4.min.js"></script>
+
+		<!-- Mobile Connection Mobile Inits -->
+
+    <!-- Mshell Mobile Inits -->
+      <script src="../public/js/mshell-mobileinit.js"></script>
+
+  	<!-- JQuery Mobile JS -->
+      <script src="../public/jqmobile/jquery.mobile-1.0.1.min.js"></script>
+    	<script src="../public/jqmobile/jquery.mobile.datebox-1.0.1.min.js"></script>
+
+    <!-- Mobile Connection JS -->
+      <script src="../public/js/mc.js"></script>
+
+    <!-- Mshell JS -->
+      <script src="../public/js/mshell.js"></script>
+</head>
+<body class="ui-body-b">
+		<div data-role="page" id="help-page" data-cache="false" data-add-back-btn="false" class="page logged-out">
+
+    <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">
+			<a href="<%= url_for :controller => :Emergency, :action => :emergency_page %>" data-icon="arrow-l" data-direction="reverse" data-role="button" data-theme="b">Back</a>
+			<h2>RUMobile</h2>
+    </div><!-- header -->
+<div data-role="content" class="content" data-theme="h">
+	
+	<div id="settings">
+		<ul data-role="listview" data-inset="true">
+			<li style="color:#fff;background-color:#000066;">Settings</li>
+			<li style="color:#000;background-color:#fff;">
+			<div data-role="fieldcontain">
+				<legend>When will you receive notifications:</legend>
+				<fieldset data-role="controlgroup" data-mini="true">
+
+    			<input type="radio" name="radio-mini" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
+    			<label for="radio-push">Push(Automatic)</label>
+
+					<input type="radio" name="radio-mini" id="radio-5mins" value="10mins"  data-theme="h"/>
+    			<label for="radio-5mins">Every 5mins</label>
+    	
+    			<input type="radio" name="radio-mini" id="radio-10mins" value="10mins"  data-theme="h"/>
+    			<label for="radio-10mins">Every 10mins</label>
+				</fieldset>	
+			</div>
+		</li>
+
+		<li style="color:#000;background-color:#fff;">
+			<div data-role="fieldcontain">
+			<legend>What alerts will you receive:</legend>
+				<fieldset data-role="controlgroup">
+					<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" />
+					<label for="EmergenciesCB">Emergencies</label>
+	
+					<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" />
+					<label for="WeatherCB">Weather</label>
+	
+					<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" />
+					<label for="NewsCB">News</label>
+				</fieldset>
+			</div>
+		</li>
+		</ul>
 	</div>
-
-  <div data-role="content">
-    <ul data-role="listview">
-      <% @appsettingses.each do |appsettings| %>
-      
-          <li>
-            <a href="<%= url_for :action => :show, :id => appsettings.object %>">
-              <%= appsettings.TimeIncrement %>
-            </a>
-          </li>
-      
-      <% end %>
-    </ul>
-  </div>
-
-</div>
+<div data-role="footer" data-theme="z" id="icon-mshell-show-page" data-position="fixed">
+      <img data-icon="ru" src="../../public/images/blank.gif" class="footerLogo">
+    </div><!-- footer -->
+</div><!-- /page -->
+</body>
+</html>

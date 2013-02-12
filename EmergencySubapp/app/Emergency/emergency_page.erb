@@ -54,51 +54,11 @@
     <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">
 			<a href="<%= Rho::RhoConfig.start_path %>" data-icon="arrow-l" data-direction="reverse" data-role="button" data-theme="b">Back</a>
 			<h2>RUMobile</h2>
-			<a href="" id="settingsButton" data-icon="gear" data-role="button" data-theme="b">Settings</a>
+			<a href="<%= url_for :controller => :AppSettings, :action => :index %>" id="settingsButton" data-icon="gear" data-role="button" data-theme="b">Settings</a>
     </div><!-- header -->
 
 	<div data-role="content" class="content" data-theme="h">
 	
-	<div id="settings">
-		<ul data-role="listview" data-inset="true">
-			<li style="color:#fff;background-color:#000066;">Settings</li>
-			<li style="color:#000;background-color:#fff;">
-			<div data-role="fieldcontain">
-				<legend>When will you receive notifications:</legend>
-				<fieldset data-role="controlgroup" data-mini="true">
-
-    			<input type="radio" name="radio-mini" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
-    			<label for="radio-push">Push(Automatic)</label>
-
-					<input type="radio" name="radio-mini" id="radio-5mins" value="10mins"  data-theme="h"/>
-    			<label for="radio-5mins">Every 5mins</label>
-    	
-    			<input type="radio" name="radio-mini" id="radio-10mins" value="10mins"  data-theme="h"/>
-    			<label for="radio-10mins">Every 10mins</label>
-				</fieldset>	
-			</div>
-		</li>
-
-		<li style="color:#000;background-color:#fff;">
-			<div data-role="fieldcontain">
-			<legend>What alerts will you receive:</legend>
-				<fieldset data-role="controlgroup">
-					<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" />
-					<label for="EmergenciesCB">Emergencies</label>
-	
-					<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" />
-					<label for="WeatherCB">Weather</label>
-	
-					<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" />
-					<label for="NewsCB">News</label>
-				</fieldset>
-			</div>
-		</li>
-		</ul>
-	</div>
-
-
-
 	<ul data-role="listview" data-inset="true">
 		<li style="color:white;background-color:#000066;color:#fff;">RU Alerts</li>
 		<% if @emergencys.empty? %>
