@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!-- so once bookmarked the page will appear as an app and wont show the url area. -->
+  <!-- CSS -->
+    <!-- JQuery Mobile CSS -->
+    <link rel="stylesheet" href="../public/jqmobile/jquery.mobile-1.0.1.css" />
+    
+    <link rel="stylesheet" href="../public/jqmobile/jquery.mobile.datebox-1.0.1.min.css" />
+
+    <!-- Mobile Connection Theme CSS -->
+    <link rel="stylesheet" href="../public/jqmobile/mc-theme.css"/>
+
+    <!-- Mobile Connection Layout CSS -->
+    <link rel="stylesheet" href="../public/css/mc.css" />
+    <link rel="stylesheet" href="../public/css/mc-custom.css" />
+
+    <!-- Mshell CSS -->
+    <link rel="stylesheet" href="../public/css/mshell.css" /> 
+    <link rel="stylesheet" href="../public/css/mshell-custom.css" />
+
+    <!-- m-App CSS - needed for icon rendering in list-show and icon-show -->
+    <link rel="stylesheet" href="../public/css/help.css" />
+
+  <!-- JavaScript -->
+    <!-- JQuery -->
+    <script src="../public/jquery/jquery-1.6.4.min.js"></script>
+
+    <!-- Mobile Connection Mobile Inits -->
+
+    <!-- Mshell Mobile Inits -->
+      <script src="../public/js/mshell-mobileinit.js"></script>
+
+    <!-- JQuery Mobile JS -->
+      <script src="../public/jqmobile/jquery.mobile-1.0.1.min.js"></script>
+      <script src="../public/jqmobile/jquery.mobile.datebox-1.0.1.min.js"></script>
+
+    <!-- Mobile Connection JS -->
+      <script src="../public/js/mc.js"></script>
+
+    <!-- Mshell JS -->
+      <script src="../public/js/mshell.js"></script>
+
+  </head>
+  <!--  Call Popup Code -->
+  <% checkNew %>
+  <!--End of Popup Code-->
+  <body class="ui-body-b">
+  
+    <div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false" class="page logged-out">
+
+    <div data-role="header" data-theme="x" data-id="header-mshell" data-position="fixed" data-tap-toggle="false" class="headerShadow">
+      <img data-icon="rumobile" src="../public/images/blank.gif" class="headerLogo" />
+    </div><!-- header -->
+
+    <div data-role="content">
+       <div class="ui-grid-c" id="icon-view">
+         <div class="ui-block-a">
+           <a href="<%= url_for :controller => :Emergency, :action => :emergency_page %>">
+            <div class="ui-btn-up-b"><div><span class="icon-help"></span></div></div>
+             <span class="label">Emergency</span>
+           </a>
+         </div>
+       </div>
+     </div><!-- /content -->
+
+    <div data-role="footer" data-theme="z" id="icon-mshell-show-page" data-position="fixed">
+      <img data-icon="ru" src="../public/images/blank.gif" class="footerLogo">
+    </div><!-- footer -->
+</div><!-- /page -->
+</body>
+</html>
