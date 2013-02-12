@@ -31,7 +31,7 @@ class HomeController < Rho::RhoController
       :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
       :headers => {},
       :callback => url_for(:controller => :Emergency, :action => :httpdownload_callback))
-    Rho::Timer.start(2000, url_for(:action => :timer_callback), "test")
+    Rho::Timer.start(4000, url_for(:action => :timer_callback), "test")
   end 
   
   # Start a new thread that will sleep for 5 seconds to allow parsing to complete and then 
