@@ -1,0 +1,25 @@
+<div data-role="page" data-add-back-btn="true">
+
+  <div data-role="header" data-position="inline">
+    <%= link_to "Back", :action => :index %>
+    <h1><%= @appsettings.TimeIncrement %></h1>
+    <%= link_to "Edit", :action => :edit, :id => @appsettings.object %>
+  </div>
+
+  <div data-role="content">
+    <table>
+      
+      <tr>
+    	<td class="itemLabel">TimeIncrement</td>
+        <td class="itemValue"><%= @appsettings.TimeIncrement%></td>
+      </tr>
+      
+      <tr>
+    	<td class="itemLabel">NotificationTypes</td>
+        <td class="itemValue"><%= @appsettings.NotificationTypes%></td>
+      </tr>
+      
+    </table>
+  </div>
+
+</div>

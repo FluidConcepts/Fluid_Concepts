@@ -1,0 +1,30 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>New <%= @appsettings.title %></h1>
+    <a href="<%= url_for :action => :index %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :create %>">
+      <input type="hidden" name="id" value="<%= @appsettings.object %>"/>
+
+      
+          <div data-role="fieldcontain">
+            <label for="appsettings[TimeIncrement]" class="fieldLabel">Timeincrement</label>
+            <input type="text" id="appsettings[TimeIncrement]" name="appsettings[TimeIncrement]" <%= placeholder("Timeincrement") %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="appsettings[NotificationTypes]" class="fieldLabel">Notificationtypes</label>
+            <input type="text" id="appsettings[NotificationTypes]" name="appsettings[NotificationTypes]" <%= placeholder("Notificationtypes") %> />
+          </div>
+      
+
+      <input type="submit" value="Create"/>
+    </form>
+  </div>
+
+</div>

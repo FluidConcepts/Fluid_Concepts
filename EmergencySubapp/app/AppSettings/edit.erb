@@ -1,0 +1,31 @@
+<div data-role="page">
+
+  <div data-role="header" data-position="inline">
+    <h1>Edit <%= @appsettings.TimeIncrement %></h1>
+    <a href="<%= url_for :action => :show, :id => @appsettings.object %>" class="ui-btn-left" data-icon="back" data-direction="reverse">
+      Cancel
+    </a>
+    <a href="<%= url_for :action => :delete, :id => @appsettings.object %>" class="ui-btn-right" data-icon="delete" data-direction="reverse">
+      Delete
+    </a>
+  </div>
+
+  <div data-role="content">
+    <form method="POST" action="<%= url_for :action => :update %>">
+      <input type="hidden" name="id" value="<%= @appsettings.object %>"/>
+      
+          <div data-role="fieldcontain">
+            <label for="appsettings[TimeIncrement]" class="fieldLabel">Timeincrement</label>
+            <input type="text" id="appsettings[TimeIncrement]" name="appsettings[TimeIncrement]" value="<%= @appsettings.TimeIncrement %>" <%= placeholder( "Timeincrement" ) %> />
+          </div>
+      
+          <div data-role="fieldcontain">
+            <label for="appsettings[NotificationTypes]" class="fieldLabel">Notificationtypes</label>
+            <input type="text" id="appsettings[NotificationTypes]" name="appsettings[NotificationTypes]" value="<%= @appsettings.NotificationTypes %>" <%= placeholder( "Notificationtypes" ) %> />
+          </div>
+      
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+
+</div>
