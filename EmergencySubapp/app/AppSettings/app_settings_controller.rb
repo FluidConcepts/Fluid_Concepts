@@ -4,6 +4,39 @@ require 'helpers/browser_helper'
 class AppSettingsController < Rho::RhoController
   include BrowserHelper
 
+	# SET appSettings
+	def setAppSettings
+		#First Delete all previous settings objects
+		Alert.show_status("Here","I got here","hide")
+		AppSettings.delete_all()
+
+		#Get the user's choices from the webpage...
+		time_increment = @params['settings[time]']
+		emergency_cb = @params['settings[EmergenciesCB]']
+		weather_cb = @params['settings[WeatherCB]']
+		news_cb = @params['settings[NewsCB]']
+		notification_types = "";
+		if emergency_cb
+			notifcation_types += emergency_cb		
+			notifcation_types += ","
+		end
+		if weather_cb		
+			notifcation_types += weather_cb		
+			notifcation_types += ","
+		end
+		if news_cb
+			notifcation_types += news_cb		
+		end
+			
+
+		#Then create a new AppSettings object with the user's choices
+		@appsettings = AppSettings.create({"TimeIncrement" => time_increment, "NotificationTypes" => notification_types})
+		ti = "Time Increment: " + AppSettings.find(:first).TimeIncrement
+		nt = "Notification Types: " + AppSettings.find(:first).NotificationTypes
+		text = ti + "/n" + nt
+		Alert.show_status("Settings", "Time Increment: " + text, "hide")
+	end	
+
   # GET /AppSettings
   def index
     @appsettingses = AppSettings.find(:all)
