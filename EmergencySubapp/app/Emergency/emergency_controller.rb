@@ -17,9 +17,9 @@ class EmergencyController < Rho::RhoController
 		end
 		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
     if @emergency.empty? == false
-      redirect (url_for( :action => :show, :id => @emergency[0].object))
+      WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
     else
-      redirect (url_for( :action => :index ))
+      WebView.navigate(url_for( :action => :index ))
     end 
 	end		
 	
