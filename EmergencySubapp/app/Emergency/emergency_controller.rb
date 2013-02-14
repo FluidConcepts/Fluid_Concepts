@@ -21,7 +21,11 @@ class EmergencyController < Rho::RhoController
     else
       WebView.navigate(url_for( :action => :index ))
     end 
-	end		
+	end	
+		
+	def portal
+	  WebView.navigate "http://myru.radford.edu/cp/home/displaylogin"
+	end
 	
 	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
