@@ -7,34 +7,30 @@ class AppSettingsController < Rho::RhoController
 	# SET appSettings
 	def setAppSettings
 		#First Delete all previous settings objects
-		Alert.show_status("Here","I got here","hide")
 		AppSettings.delete_all()
 
 		#Get the user's choices from the webpage...
-		time_increment = @params['settings[time]']
-		emergency_cb = @params['settings[EmergenciesCB]']
-		weather_cb = @params['settings[WeatherCB]']
-		news_cb = @params['settings[NewsCB]']
+		time_increment = @params['TimeIncrement']
+		emergency_cb = @params['EmergenciesCB']
+		weather_cb = @params['WeatherCB']
+		news_cb = @params['NewsCB']
 		notification_types = "";
 		if emergency_cb
-			notifcation_types += emergency_cb		
-			notifcation_types += ","
+			notification_types += emergency_cb		
+			notification_types += ","
 		end
 		if weather_cb		
-			notifcation_types += weather_cb		
-			notifcation_types += ","
+			notification_types += weather_cb		
+			notification_types += ","
 		end
 		if news_cb
-			notifcation_types += news_cb		
+			notification_types += news_cb		
 		end
 			
 
 		#Then create a new AppSettings object with the user's choices
-		@appsettings = AppSettings.create({"TimeIncrement" => time_increment, "NotificationTypes" => notification_types})
-		ti = "Time Increment: " + AppSettings.find(:first).TimeIncrement
-		nt = "Notification Types: " + AppSettings.find(:first).NotificationTypes
-		text = ti + "/n" + nt
-		Alert.show_status("Settings", "Time Increment: " + text, "hide")
+		AppSettings.create({"TimeIncrement" => time_increment, "NotificationTypes" => notification_types})
+		redirect :action => :index
 	end	
 
   # GET /AppSettings

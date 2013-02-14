@@ -54,57 +54,55 @@
 <div data-role="content" class="content" data-theme="h">
 	
   <form method="POST" action="<%= url_for :action => :setAppSettings %>">
-	<div id="settings">
-		<ul data-role="listview" data-inset="true">
-			<li style="color:#fff;background-color:#000066;">Settings</li>
-			<li style="color:#000;background-color:#fff;">
-			<div data-role="fieldcontain">
-				<legend>When will you receive notifications:</legend>
-				<fieldset data-role="controlgroup" data-mini="true">
+			<ul data-role="listview" data-inset="true">
+				<li style="color:#fff;background-color:#000066;">Settings</li>
+				<li style="color:#000;background-color:#fff;">
+					<div data-role="fieldcontain">
+					<legend>When will you receive notifications:</legend>
+						<fieldset data-role="controlgroup" data-mini="true">
 
-    			<input type="radio" name="settings[time]" id="radio-never" value="Never" data-theme="h"/>
-    			<label for="radio-never">Never</label>
+    					<input type="radio" name="TimeIncrement" id="radio-never" value="Never" data-theme="h"/>
+    					<label for="radio-never">Never</label>
 
-    			<input type="radio" name="settings[time]" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
-    			<label for="radio-push">Push(Automatic)</label>
+    					<input type="radio" name="TimeIncrement" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
+    					<label for="radio-push">Push(Automatic)</label>
 
-					<input type="radio" name="settings[time]" id="radio-5mins" value="10mins"  data-theme="h"/>
-    			<label for="radio-5mins">Every 5 mins</label>
+							<input type="radio" name="TimeIncrement" id="radio-5mins" value="10mins"  data-theme="h"/>
+    					<label for="radio-5mins">Every 5 mins</label>
     	
-    			<input type="radio" name="settings[time]" id="radio-15mins" value="15mins"  data-theme="h"/>
-    			<label for="radio-15mins">Every 15 mins</label>
+    					<input type="radio" name="TimeIncrement" id="radio-15mins" value="15mins"  data-theme="h"/>
+    					<label for="radio-15mins">Every 15 mins</label>
 
-    			<input type="radio" name="settings[time]" id="radio-30mins" value="30mins"  data-theme="h"/>
-    			<label for="radio-30mins">Every 30 mins</label>
+    					<input type="radio" name="TimeIncrement" id="radio-30mins" value="30mins"  data-theme="h"/>
+    					<label for="radio-30mins">Every 30 mins</label>
 
-    			<input type="radio" name="settings[time]" id="radio-1hour" value="1hour"  data-theme="h"/>
-    			<label for="radio-1hour">Every 1 hour</label>
+    					<input type="radio" name="TimeIncrement" id="radio-1hour" value="1hour"  data-theme="h"/>
+    					<label for="radio-1hour">Every 1 hour</label>
 
-    			<input type="radio" name="settings[time]" id="radio-2hours" value="2hours"  data-theme="h"/>
-    			<label for="radio-2hours">Every 2 hours</label>
+    					<input type="radio" name="TimeIncrement" id="radio-2hours" value="2hours"  data-theme="h"/>
+    					<label for="radio-2hours">Every 2 hours</label>
 
-				</fieldset>	
-			</div>
-		</li>
+					</fieldset>	
+				</div>
+			</li>
 
-		<li style="color:#000;background-color:#fff;">
-			<div data-role="fieldcontain">
-			<legend>What alerts will you receive:</legend>
-				<fieldset data-role="controlgroup">
-					<input type="checkbox" name="settings[EmergenciesCB]" id="EmergenciesCB" class="custom" value="emergency" />
-					<label for="EmergenciesCB">Emergencies</label>
+			<li style="color:#000;background-color:#fff;">
+				<div data-role="fieldcontain">
+				<legend>What alerts will you receive:</legend>
+					<fieldset data-role="controlgroup">
+						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="emergency" />
+						<label for="EmergenciesCB">Emergencies</label>
 	
-					<input type="checkbox" name="settings[WeatherCB]" id="WeatherCB" class="custom" value="weather"/>
-					<label for="WeatherCB">Weather</label>
+						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="weather"/>
+						<label for="WeatherCB">Weather</label>
 	
-					<input type="checkbox" name="settings[NewsCB]" id="NewsCB" class="custom" value="news" />
-					<label for="NewsCB">News</label>
-				</fieldset>
-			</div>
-		</li>
+						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="news" />
+						<label for="NewsCB">News</label>
+					</fieldset>
+				</div>
+			</li>
 		</ul>
-	</div>
-   <input type="button" value="Confirm Change"/> 
+   <input type="submit" value="Confirm Change"/> 
    </form>
 <div data-role="footer" data-theme="z" id="icon-mshell-show-page" data-position="fixed">
       <img data-icon="ru" src="../../public/images/blank.gif" class="footerLogo">
