@@ -42,10 +42,11 @@
       <script src="../public/js/mshell.js"></script>
 
   </head>
-  <!--  Call Popup Code -->
-  <% checkNew %>
+  <!--  Start a Timer to check for updates -->
+  <% Rho::Timer.start(30000, url_for(:action => :checkNew), "nothing") %>
   <!--End of Popup Code-->
   <body class="ui-body-b">
+  
   
     <div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false" class="page logged-out">
 

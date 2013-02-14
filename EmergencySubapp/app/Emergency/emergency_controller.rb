@@ -15,8 +15,8 @@ class EmergencyController < Rho::RhoController
 			Alert.hide_popup
 		else
 		end
-		@emergency = Emergency.find(:all, :conditions =>{'title' => title})
-    if @emergency.empty? == false
+		@emergency = Emergency.find(:first)
+    if @emergency
       WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
     else
       WebView.navigate(url_for( :action => :index ))
@@ -30,7 +30,7 @@ class EmergencyController < Rho::RhoController
 	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")) 
 	    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
 	      f.flock(File::LOCK_EX)
-	     # f.write(@emergencys[0].date + "meh")
+	      f.write(@emergencys[0].date)
 	      f.close}
 	  end
     Rho::AsyncHttp.download_file(
