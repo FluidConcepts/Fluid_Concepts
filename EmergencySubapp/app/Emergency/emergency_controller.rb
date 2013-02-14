@@ -17,7 +17,7 @@ class EmergencyController < Rho::RhoController
 		end
 		@emergency = Emergency.find(:first)
     if @emergency
-      WebView.navigate(url_for( :action => :show, :id => @emergency[0].object))
+      WebView.navigate(url_for( :action => :show, :id => @emergency.object))
     else
       WebView.navigate(url_for( :action => :index ))
     end 
