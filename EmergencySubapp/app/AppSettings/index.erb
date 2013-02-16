@@ -53,7 +53,17 @@
     </div><!-- header -->
 <div data-role="content" class="content" data-theme="h">
 	
-  <form method="POST" action="<%= url_for :action => :setAppSettings %>">
+  <form method="POST" action="<%= url_for :action => :setAppSettings %>" onsubmit="return confirmPopup();">
+	<script type="text/javascript" charset="utf-8">
+		function confirmPopup()
+		{
+			var conf=confirm("Are you sure?");
+			if(conf==true)
+				return true;
+			else
+				return false;
+		}
+	</script>
 			<ul data-role="listview" data-inset="true">
 				<li style="color:#fff;background-color:#000066;">Settings</li>
 				<li style="color:#000;background-color:#fff;">
