@@ -56,6 +56,7 @@ class HomeController < Rho::RhoController
             f.write(@emergency.fullTime)      
             f.close
         }
+        Rho::Timer.start(40000, url_for(:action => :checkNew), "nothing")
       end
     end
   end

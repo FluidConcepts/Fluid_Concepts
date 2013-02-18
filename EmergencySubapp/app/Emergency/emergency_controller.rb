@@ -13,14 +13,14 @@ class EmergencyController < Rho::RhoController
 		title = @params['button_id']
 		if title == "Dismiss"               
 			Alert.hide_popup
-		else
+		else		
+		  @emergency = Emergency.find(:first)
+		  if @emergency
+		    WebView.navigate(url_for( :action => :show, :id => @emergency.object))
+		  else
+		    WebView.navigate(url_for( :action => :index ))
+		  end 
 		end
-		@emergency = Emergency.find(:first)
-    if @emergency
-      WebView.navigate(url_for( :action => :show, :id => @emergency.object))
-    else
-      WebView.navigate(url_for( :action => :index ))
-    end 
 	end	
 		
 	def portal
