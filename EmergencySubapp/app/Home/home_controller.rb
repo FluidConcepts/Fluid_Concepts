@@ -56,7 +56,10 @@ class HomeController < Rho::RhoController
             f.write(@emergency.fullTime)      
             f.close
         }
-        Rho::Timer.start(40000, url_for(:action => :checkNew), "nothing")
+        settings = AppSettings.find(:first).TimeIncrement
+        tInc = settings * 1000
+        Alert.show_popup "tInc"
+        Rho::Timer.start(tInc, url_for(:action => :checkNew), "nothing")
       end
     end
   end

@@ -43,7 +43,14 @@
 
   </head>
   <!--  Start a Timer to check for updates -->
-  <% Rho::Timer.start(3000, url_for(:action => :checkNew), "nothing") %>
+  <% 
+    settings = AppSettings.find(:first).TimeIncrement
+    if settings
+      if settings != "Never"
+        Rho::Timer.start(3000, url_for(:action => :checkNew), "nothing")
+      end
+    end 
+  %>
   <!--End of Popup Code-->
   <body class="ui-body-b">
   
