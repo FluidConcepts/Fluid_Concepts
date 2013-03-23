@@ -68,7 +68,10 @@ class EmergencyController < Rho::RhoController
     end
     file.close
 	end
-	
+	def hide_all
+	  emg = Emergency.find(:first)
+	  
+	end
 	# Find all emergencys
 	def emergency_page
 		@emergencys = Emergency.find(:all)

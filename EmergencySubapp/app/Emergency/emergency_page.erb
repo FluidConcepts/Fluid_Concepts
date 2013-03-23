@@ -61,6 +61,17 @@
 	
 	<ul data-role="listview" data-inset="true">
 		<li style="color:white;background-color:#000066;color:#fff;">RU Alerts</li>
+		<%  
+		    @whatShouldIDisplay = 0 
+		    if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "hide")) 
+		%>
+		<% 
+		   File.open(File.join(Rho::RhoApplication::get_base_app_path, "hide"), 
+		      File::RDWR|File::CREAT){ |f|
+		      f.flock(File::LOCK_EX)
+		      @whatShouldIDisplay = f.read()
+		      f.close} %>
+		<% end %>
 		<% if @emergencys.empty? %>
 				<li style="color:#000;background-color:#fff;"><h3>No Current Alerts</h3>
 				<p>There are currently no recent alerts. If you have additional questions, please call the Office of Emergency Preparedness at (540) 831-7155
@@ -68,17 +79,22 @@
 				</li>
 		<% else %>
 			<% @emergencys.each do |emg| %>
-			<a href="<%= url_for :action => :show, :id => emg.object %>">
-				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
-				<p><%= emg.description %></p>
-				<p class="ui-li-aside"><strong><%= emg.date %> <%= emg.time %></strong></p>
-				</li></a>
+			  <% if emg.fullTime.to_i > @whatShouldIDisplay %>
+  			  <a href="<%= url_for :action => :show, :id => emg.object %>">
+  				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
+  				<p><%= emg.description %></p>
+  				<p class="ui-li-aside"><strong><%= emg.date %> <%= emg.time %></strong></p>
+  				</li></a>
+				<% end %>
 			<% end %>
 		<% end %>
 	</ul>
 		<div data-role="button" data-theme="b">
 		<a href="<%= url_for(:action => :refresh_database) %>"> Refresh </a>
 		</div>
+    <div data-role="button" data-theme="b">
+    <a href="<%= url_for(:action => :hide_all) %>"> Refresh </a>
+    </div>
     <div data-role="button" data-theme="b">
       <a href="<%= url_for(:action => :portal) %>"> Edit RU Alert Contact Info</a>
     </div>
