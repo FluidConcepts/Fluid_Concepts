@@ -79,7 +79,7 @@
 				</li>
 		<% else %>
 			<% @emergencys.each do |emg| %>
-			  <% if emg.fullTime.to_i > @whatShouldIDisplay %>
+			  <% if emg.fullTime.to_i > @whatShouldIDisplay.to_i %>
   			  <a href="<%= url_for :action => :show, :id => emg.object %>">
   				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
   				<p><%= emg.description %></p>
@@ -93,7 +93,7 @@
 		<a href="<%= url_for(:action => :refresh_database) %>"> Refresh </a>
 		</div>
     <div data-role="button" data-theme="b">
-    <a href="<%= url_for(:action => :hide_all) %>"> Refresh </a>
+    <a href="<%= url_for(:action => :hide_all) %>"> Clear Alerts </a>
     </div>
     <div data-role="button" data-theme="b">
       <a href="<%= url_for(:action => :portal) %>"> Edit RU Alert Contact Info</a>
