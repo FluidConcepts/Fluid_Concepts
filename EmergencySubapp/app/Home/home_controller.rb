@@ -20,7 +20,6 @@ class HomeController < Rho::RhoController
         @@value = f.read()
         f.close
     }  
-    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
     # Destroy feed.xml if it exists. We don't want our file to write improperly.
     if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
       File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
@@ -49,6 +48,8 @@ class HomeController < Rho::RhoController
           :buttons => [{:id => @emergency.title, :title => 'More Info'},
           {:id => 'Dismiss', :title => 'Dismiss'}],
           :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
+        # Delete the file first. 
+        File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
         # Write the full date and time of the shown pop-up to the last.txt file. We use this above
         # to filter seen pop-ups.    
         File.open(File.join(Rho::RhoApplication::get_base_app_path, "shown"), 
