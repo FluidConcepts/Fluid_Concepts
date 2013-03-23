@@ -70,7 +70,14 @@ class EmergencyController < Rho::RhoController
 	end
 	def hide_all
 	  emg = Emergency.find(:first)
-	  
+	  if !emg.nil?
+      File.open(File.join(Rho::RhoApplication::get_base_app_path, "hide"), 
+        File::RDWR|File::CREAT){ |f|
+          f.flock(File::LOCK_EX)
+          f.write(emg.fullTime)      
+          f.close
+        }
+	  end
 	end
 	# Find all emergencys
 	def emergency_page
