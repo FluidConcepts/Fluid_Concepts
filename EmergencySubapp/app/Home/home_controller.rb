@@ -20,6 +20,7 @@ class HomeController < Rho::RhoController
         @@value = f.read()
         f.close
     }  
+    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
     # Destroy feed.xml if it exists. We don't want our file to write improperly.
     if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
       File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
