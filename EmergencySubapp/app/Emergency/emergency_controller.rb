@@ -30,13 +30,12 @@ class EmergencyController < Rho::RhoController
 	
 	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
-	  @emergencys = Emergency.find(:all)
+	  # Delete the stored data so new data is written correctly
 	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
-	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")) 
-	    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), File::RDWR|File::CREAT){ |f|
-	      f.flock(File::LOCK_EX)
-	      f.write(@emergencys[0].date)
-	      f.close}
+	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+	  end
+	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
+      File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
 	  end
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
@@ -44,8 +43,6 @@ class EmergencyController < Rho::RhoController
       :headers => {},
       :callback => url_for(:action => :httpdownload_callback)
     )
-	  sleep(2)
-	  redirect :emergency_page
 	end
 	
 	# Do this on download complete
@@ -65,9 +62,20 @@ class EmergencyController < Rho::RhoController
       nixTimeStamp = Time.parse(date_time).to_i
       # Create this Emergency object in the database.
       Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp})
+      # This is a refresh call so the user will see the alert. Do not show a popup for any alert downloaded this
+      # way.
+      if firstLoop
+        firstLoop = false
+        File.open(File.join(Rho::RhoApplication::get_base_app_path, "shown"), File::RDWR|File::CREAT){ |f|
+          f.flock(File::LOCK_EX)
+          f.write(nixTimeStamp)
+          f.close}
+      end
     end
     file.close
 	end
+	
+	# Hide all alerts currently on the device
 	def hide_all
 	  emg = Emergency.find(:first)
 	  if !emg.nil?
