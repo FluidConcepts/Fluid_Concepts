@@ -11,3 +11,5 @@ bin/
 /feed.xml
 /feed
 /last.txt
+/shown
+/hide
