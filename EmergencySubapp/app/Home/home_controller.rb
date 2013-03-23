@@ -14,7 +14,7 @@ class HomeController < Rho::RhoController
   def checkNew
     # Open the file containing the information of the last update that was displayed and store 
     # it in value.
-    File.open(File.join(Rho::RhoApplication::get_base_app_path, "housekeeping"), 
+    File.open(File.join(Rho::RhoApplication::get_base_app_path, "shown"), 
       File::RDWR|File::CREAT){ |f|
         f.flock(File::LOCK_EX)
         @@value = f.read()
@@ -50,7 +50,7 @@ class HomeController < Rho::RhoController
           :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
         # Write the full date and time of the shown pop-up to the last.txt file. We use this above
         # to filter seen pop-ups.    
-        File.open(File.join(Rho::RhoApplication::get_base_app_path, "housekeeping"), 
+        File.open(File.join(Rho::RhoApplication::get_base_app_path, "shown"), 
           File::RDWR|File::CREAT){ |f|
             f.flock(File::LOCK_EX)
             f.write(@emergency.fullTime)      
