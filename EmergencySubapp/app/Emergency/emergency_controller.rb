@@ -77,6 +77,7 @@ class EmergencyController < Rho::RhoController
           f.write(emg.fullTime)      
           f.close
         }
+     redirect :emergency_page
 	  end
 	end
 	# Find all emergencys
