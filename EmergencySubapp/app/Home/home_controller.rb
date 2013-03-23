@@ -14,17 +14,17 @@ class HomeController < Rho::RhoController
   def checkNew
     # Open the file containing the information of the last update that was displayed and store 
     # it in value.
-    File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), 
+    File.open(File.join(Rho::RhoApplication::get_base_app_path, "housekeeping"), 
       File::RDWR|File::CREAT){ |f|
         f.flock(File::LOCK_EX)
         @@value = f.read()
         f.close
     }  
-    # Destroy feed.xml if it exists. We dont want our file to write improperly.
+    # Destroy feed.xml if it exists. We don't want our file to write improperly.
     if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
       File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
     end 
-    # Download the new XML file representing the rss feed. On download complete callback in 
+    # Download the new XML file representing the RSS feed. On download complete callback in 
     # emergency_controller will parse the XML and update the database.
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
@@ -38,9 +38,9 @@ class HomeController < Rho::RhoController
   # check the database for to see if there is a new alert. 
   def timer_callback
     @emergency = Emergency.find(:first)        # Get the newly update database
-    if(@emergency != nil)                      # Can't display popup with no alerts
-      if(@emergency.fullTime > @@value)        # Only show popup if the newest hasn't been shown
-        # Show the popup
+    if(@emergency != nil)                      # Can't display pop-up with no alerts
+      if(@emergency.fullTime > @@value)        # Only show pop-up if the newest hasn't been shown
+        # Show the pop-up
         Alert.show_popup( {
           :message => @emergency.description, 
           :title => @emergency.title, 
@@ -48,9 +48,9 @@ class HomeController < Rho::RhoController
           :buttons => [{:id => @emergency.title, :title => 'More Info'},
           {:id => 'Dismiss', :title => 'Dismiss'}],
           :callback => url_for(:controller => :Emergency, :action => :popup_handler) } )
-        # Write the full date and time of the shown popup to the last.txt file. We use this above
-        # to filter seen popups.    
-        File.open(File.join(Rho::RhoApplication::get_base_app_path, "last.txt"), 
+        # Write the full date and time of the shown pop-up to the last.txt file. We use this above
+        # to filter seen pop-ups.    
+        File.open(File.join(Rho::RhoApplication::get_base_app_path, "housekeeping"), 
           File::RDWR|File::CREAT){ |f|
             f.flock(File::LOCK_EX)
             f.write(@emergency.fullTime)      
