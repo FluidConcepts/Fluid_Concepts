@@ -39,7 +39,7 @@ class HomeController < Rho::RhoController
   def timer_callback
     @emergency = Emergency.find(:first)        # Get the newly update database
     if(@emergency != nil)                      # Can't display popup with no alerts
-      if(!@emergency.fullTime.eql?(@@value))   # Only show popup if the newest hasnt been shown
+      if(@emergency.fullTime > @@value)        # Only show popup if the newest hasn't been shown
         # Show the popup
         Alert.show_popup( {
           :message => @emergency.description, 
