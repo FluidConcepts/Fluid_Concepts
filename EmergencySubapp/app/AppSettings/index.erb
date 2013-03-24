@@ -77,19 +77,62 @@
 <!--    					<input type="radio" name="TimeIncrement" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
     					<label for="radio-push">Push(Automatic)</label>
 -->
-							<input type="radio" name="TimeIncrement" id="radio-5mins" value="10"  checked="checked" data-theme="h"/>
+<%if !AppSettings.find(:all).empty?
+	 appSetting = AppSettings.find(:first) 
+	end%>
+							<input type="radio" name="TimeIncrement" id="radio-5mins" value="5"
+<% if appSetting.TimeIncrement =="5" 
+			value1 = "checked='checked'"
+	 else
+			value1 = ""
+	end
+%>
+ 	<%value1%> 
+ data-theme="h"/>
     					<label for="radio-5mins">Every 5 mins</label>
     	
-    					<input type="radio" name="TimeIncrement" id="radio-15mins" value="15"  data-theme="h"/>
+    					<input type="radio" name="TimeIncrement" id="radio-15mins" value="15"
+<% if appSetting.TimeIncrement =="15"
+			value2 = "checked='checked'"
+	 else
+			value2 = ""
+	end
+%>
+	<%value2%>
+  data-theme="h"/>
     					<label for="radio-15mins">Every 15 mins</label>
 
-    					<input type="radio" name="TimeIncrement" id="radio-30mins" value="30"  data-theme="h"/>
+    					<input type="radio" name="TimeIncrement" id="radio-30mins" value="30"
+<% if appSetting.TimeIncrement =="30"
+			value3 = "checked='checked'"
+ 	 else
+			value3 = ""
+	end
+%>
+	<%value3%>
+  data-theme="h"/>
     					<label for="radio-30mins">Every 30 mins</label>
 
-    					<input type="radio" name="TimeIncrement" id="radio-1hour" value="60"  data-theme="h"/>
+    					<input type="radio" name="TimeIncrement" id="radio-1hour" value="60"
+<% if appSetting.TimeIncrement =="60"
+			value4 = "checked='checked'"
+	 else
+			value4 = ""
+	end
+%>
+	<%value4%>
+  data-theme="h"/>
     					<label for="radio-1hour">Every 1 hour</label>
 
-    					<input type="radio" name="TimeIncrement" id="radio-2hours" value="120"  data-theme="h"/>
+    					<input type="radio" name="TimeIncrement" id="radio-2hours" value="120"
+<% if appSetting.TimeIncrement =="120"
+			value5 = "checked='checked'"
+	 else
+			value5 = ""
+	end
+%>
+ 	<%value5%>
+  data-theme="h"/>
     					<label for="radio-2hours">Every 2 hours</label>
 
 					</fieldset>	
