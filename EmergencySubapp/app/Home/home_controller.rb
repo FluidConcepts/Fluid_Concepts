@@ -81,9 +81,12 @@ class HomeController < Rho::RhoController
         }
       end
     end        
-    settings = AppSettings.find(:first).TimeIncrement.to_i
-    settings = settings * 60000
-    Rho::Timer.start(settings, url_for(:action => :checkNew), "nothing")
+    settings = AppSettings.find(:first)
+    if(settings != "Never")
+      settings = settings.TimeIncrement.to_i
+      settings = settings * 60000
+      Rho::Timer.start(settings, url_for(:action => :checkNew), "nothing")
+    end
   end
   # GET /Home/{1}
   def show
