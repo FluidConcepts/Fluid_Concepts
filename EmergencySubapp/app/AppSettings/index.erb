@@ -87,7 +87,7 @@
 			value1 = ""
 	end
 %>
- 	<%value1%> 
+ 	<%=value1%> 
  data-theme="h"/>
     					<label for="radio-5mins">Every 5 mins</label>
     	
@@ -98,7 +98,7 @@
 			value2 = ""
 	end
 %>
-	<%value2%>
+	<%=value2%>
   data-theme="h"/>
     					<label for="radio-15mins">Every 15 mins</label>
 
@@ -109,7 +109,7 @@
 			value3 = ""
 	end
 %>
-	<%value3%>
+	<%=value3%>
   data-theme="h"/>
     					<label for="radio-30mins">Every 30 mins</label>
 
@@ -120,7 +120,7 @@
 			value4 = ""
 	end
 %>
-	<%value4%>
+	<%=value4%>
   data-theme="h"/>
     					<label for="radio-1hour">Every 1 hour</label>
 
@@ -131,7 +131,7 @@
 			value5 = ""
 	end
 %>
- 	<%value5%>
+ 	<%=value5%>
   data-theme="h"/>
     					<label for="radio-2hours">Every 2 hours</label>
 
@@ -139,17 +139,47 @@
 				</div>
 			</li>
 
+
+<% csv = appSetting.NotificationTypes
+	 nTypes = csv.split(",")
+%>
 			<li style="color:#000;background-color:#fff;">
 				<div data-role="fieldcontain">
 				<legend>What alerts will you receive:</legend>
 					<fieldset data-role="controlgroup">
-						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="emergency" />
+						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="emergency"
+							<% if nTypes.include?('emergency')
+									selected="checked='checked'"
+								 else
+									selected=""
+								 end
+							%>
+							<%=selected%>					
+	
+						 />
 						<label for="EmergenciesCB">Emergencies</label>
 	
-						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="weather"/>
+						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="weather"
+							<% if nTypes.include?('weather')
+									selected="checked='checked'"
+								 else
+									selected=""
+								 end
+							%>
+							<%=selected%>					
+
+/>
 						<label for="WeatherCB">Weather</label>
 	
-						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="news" />
+						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="news"
+							<% if nTypes.include?('news')
+									selected="checked='checked'"
+								 else
+									selected=""
+								 end
+							%>
+							<%=selected%>					
+ />
 						<label for="NewsCB">News</label>
 					</fieldset>
 				</div>
