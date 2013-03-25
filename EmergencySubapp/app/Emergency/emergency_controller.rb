@@ -73,6 +73,7 @@ class EmergencyController < Rho::RhoController
       end
     end
     file.close
+    WebView.navigate(url_for(:action => :emergency_page))
 	end
 	
 	# Hide all alerts currently on the device
@@ -88,6 +89,7 @@ class EmergencyController < Rho::RhoController
      redirect :emergency_page
 	  end
 	end
+	
 	# Find all emergencys
 	def emergency_page
 		@emergencys = Emergency.find(:all)
