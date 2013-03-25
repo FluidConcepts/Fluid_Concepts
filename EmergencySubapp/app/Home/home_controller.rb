@@ -1,9 +1,10 @@
 require 'rho/rhocontroller'
 require 'helpers/browser_helper'
-
+require 'rexml/document'
+require 'time'
 class HomeController < Rho::RhoController
   include BrowserHelper
-
+  include REXML
   
   # GET /Home
   def index
@@ -78,12 +79,11 @@ class HomeController < Rho::RhoController
             f.write(@emergency.fullTime)      
             f.close
         }
-        settings = AppSettings.find(:first).TimeIncrement
-        tInc = settings * 1000
-        Alert.show_popup "tInc"
-        Rho::Timer.start(tInc, url_for(:action => :checkNew), "nothing")
       end
-    end
+    end        
+    settings = AppSettings.find(:first).TimeIncrement.to_i
+    settings = settings * 60000
+    Rho::Timer.start(settings, url_for(:action => :checkNew), "nothing")
   end
   # GET /Home/{1}
   def show
