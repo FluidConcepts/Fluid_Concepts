@@ -61,7 +61,7 @@ class EmergencyController < Rho::RhoController
       # We want the "fulltime" element in our database to be a UNIX time-stamp because comparisons are easier.
       nixTimeStamp = Time.parse(date_time).to_i
       # Create this Emergency object in the database.
-      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp})
+      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp, "category" => category})
       # This is a refresh call so the user will see the alert. Do not show a popup for any alert downloaded this
       # way.
       if firstLoop
