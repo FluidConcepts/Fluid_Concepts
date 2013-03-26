@@ -45,7 +45,7 @@
   <!--  Start a Timer to check for updates -->
   <% 
 		if AppSettings.find(:all).empty?
-			AppSettings.create({"TimeIncrement" => "5", "NotificationTypes" => "emergency,weather,news"})
+			AppSettings.create({"TimeIncrement" => "5", "NotificationTypes" => "0,1,2"})
 		end
     settings = AppSettings.find(:first).TimeIncrement
     if settings
