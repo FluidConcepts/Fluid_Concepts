@@ -154,8 +154,8 @@
 				<div data-role="fieldcontain">
 				<legend>What alerts will you receive:</legend>
 					<fieldset data-role="controlgroup">
-						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="emergency"
-							<% if nTypes.include?('emergency')
+						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="0"
+							<% if nTypes.include?('0')
 									selected="checked='checked'"
 								 else
 									selected=""
@@ -166,8 +166,8 @@
 						 />
 						<label for="EmergenciesCB">Emergencies</label>
 	
-						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="weather"
-							<% if nTypes.include?('weather')
+						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="1"
+							<% if nTypes.include?('1')
 									selected="checked='checked'"
 								 else
 									selected=""
@@ -178,8 +178,8 @@
 />
 						<label for="WeatherCB">Weather</label>
 	
-						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="news"
-							<% if nTypes.include?('news')
+						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="2"
+							<% if nTypes.include?('2')
 									selected="checked='checked'"
 								 else
 									selected=""
