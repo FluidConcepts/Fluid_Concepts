@@ -70,16 +70,23 @@
 					<div data-role="fieldcontain">
 					<legend>When will you receive notifications:</legend>
 						<fieldset data-role="controlgroup" data-mini="true">
+<%if !AppSettings.find(:all).empty?
+	 appSetting = AppSettings.find(:first) 
+	end%>
 
-    					<input type="radio" name="TimeIncrement" id="radio-never" value="Never" data-theme="h"/>
+    					<input type="radio" name="TimeIncrement" id="radio-never" value="never"
+<% if appSetting.TimeIncrement =="never" 
+			value1 = "checked='checked'"
+	 else
+			value1 = ""
+	end
+%>
+ data-theme="h"/>
     					<label for="radio-never">Never</label>
 
 <!--    					<input type="radio" name="TimeIncrement" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
     					<label for="radio-push">Push(Automatic)</label>
 -->
-<%if !AppSettings.find(:all).empty?
-	 appSetting = AppSettings.find(:first) 
-	end%>
 							<input type="radio" name="TimeIncrement" id="radio-5mins" value="5"
 <% if appSetting.TimeIncrement =="5" 
 			value1 = "checked='checked'"
