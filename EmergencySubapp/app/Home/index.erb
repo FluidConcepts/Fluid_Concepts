@@ -49,7 +49,7 @@
 		end
     settings = AppSettings.find(:first).TimeIncrement
     if settings
-      if settings != "Never"
+      if settings != "never"
         Rho::Timer.start(3000, url_for(:action => :checkNew), "nothing")
       end
     end 
