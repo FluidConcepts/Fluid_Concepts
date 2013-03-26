@@ -78,9 +78,12 @@
         or (540) 831-6696</p>
 				</li>
 		<% else %>
-		  <% @displayed = false %>
+		  <% @displayed = false 
+		     @filter = @AppSettings.find(:first).NotificationTypes
+		     @filter = @filter.split(',')
+		  %>
 			<% @emergencys.each do |emg| %>
-			  <% if emg.fullTime.to_i > @whatShouldIDisplay.to_i %>
+			  <% if emg.fullTime.to_i > @whatShouldIDisplay.to_i && @filter.include?(emg.category) %>
   			  <a href="<%= url_for :action => :show, :id => emg.object %>">
   				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
   				<p><%= emg.description %></p>
