@@ -46,11 +46,12 @@ class HomeController < Rho::RhoController
       title = elm.elements["title"].text
       desc = elm.elements["description"].text
       date_time = elm.elements["pubDate"].text
+      category = elm.elements["category"].text
       date_array = [date_time[0..16], date_time[16..date_time.length-6]]
       # We want the "fulltime" element in our database to be a UNIX time-stamp because comparisons are easier.
       nixTimeStamp = Time.parse(date_time).to_i
       # Create this Emergency object in the database.
-      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp})
+      Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp, "category" => category})
     end
     file.close
   end
