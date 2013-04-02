@@ -70,12 +70,18 @@
 					<div data-role="fieldcontain">
 					<legend>When will you receive notifications:</legend>
 						<fieldset data-role="controlgroup" data-mini="true">
-<%if !AppSettings.find(:all).empty?
+<%
+#If there is an AppSettings object, store it in the appSetting variable
+if !AppSettings.find(:all).empty?
 	 appSetting = AppSettings.find(:first) 
-	end%>
+	end
+%>
 
     					<input type="radio" name="TimeIncrement" id="radio-never" value="never"
-<% if appSetting.TimeIncrement =="never" 
+<%
+#If the TimeIncrement key value of the appSetting object is equal to never
+#check the never radio button on the page
+if appSetting.TimeIncrement =="never" 
 			value1 = "checked='checked'"
 	 else
 			value1 = ""
@@ -84,61 +90,73 @@
  data-theme="h"/>
     					<label for="radio-never">Never</label>
 
-<!--    					<input type="radio" name="TimeIncrement" id="radio-push" value="Push(Automatic)" checked="checked" data-theme="h"/>
-    					<label for="radio-push">Push(Automatic)</label>
--->
 							<input type="radio" name="TimeIncrement" id="radio-5mins" value="5"
-<% if appSetting.TimeIncrement =="5" 
-			value1 = "checked='checked'"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 5
+#check the 5min radio button on the page
+if appSetting.TimeIncrement =="5" 
+			value = "checked='checked'"
 	 else
-			value1 = ""
+			value = ""
 	end
 %>
- 	<%=value1%> 
+ 	<%=value%> 
  data-theme="h"/>
     					<label for="radio-5mins">Every 5 mins</label>
     	
     					<input type="radio" name="TimeIncrement" id="radio-15mins" value="15"
-<% if appSetting.TimeIncrement =="15"
-			value2 = "checked='checked'"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 15
+#check the 15min radio button on the page
+if appSetting.TimeIncrement =="15"
+			value = "checked='checked'"
 	 else
-			value2 = ""
+			value = ""
 	end
 %>
-	<%=value2%>
+	<%=value%>
   data-theme="h"/>
     					<label for="radio-15mins">Every 15 mins</label>
 
     					<input type="radio" name="TimeIncrement" id="radio-30mins" value="30"
-<% if appSetting.TimeIncrement =="30"
-			value3 = "checked='checked'"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 30
+#check the 30min radio button on the page
+if appSetting.TimeIncrement =="30"
+			value = "checked='checked'"
  	 else
-			value3 = ""
+			value = ""
 	end
 %>
-	<%=value3%>
+	<%=value%>
   data-theme="h"/>
     					<label for="radio-30mins">Every 30 mins</label>
 
     					<input type="radio" name="TimeIncrement" id="radio-1hour" value="60"
-<% if appSetting.TimeIncrement =="60"
-			value4 = "checked='checked'"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 60
+#check the 1hour radio button on the page
+if appSetting.TimeIncrement =="60"
+			value = "checked='checked'"
 	 else
-			value4 = ""
+			value = ""
 	end
 %>
-	<%=value4%>
+	<%=value%>
   data-theme="h"/>
     					<label for="radio-1hour">Every 1 hour</label>
 
     					<input type="radio" name="TimeIncrement" id="radio-2hours" value="120"
-<% if appSetting.TimeIncrement =="120"
-			value5 = "checked='checked'"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 120
+#check the 2hour radio button on the page
+if appSetting.TimeIncrement =="120"
+			value = "checked='checked'"
 	 else
-			value5 = ""
+			value = ""
 	end
 %>
- 	<%=value5%>
+ 	<%=value%>
   data-theme="h"/>
     					<label for="radio-2hours">Every 2 hours</label>
 
@@ -147,7 +165,10 @@
 			</li>
 
 
-<% csv = appSetting.NotificationTypes
+<%
+#Grab the NotificationTypes key value from appSetting
+#and split it into an array on the , char
+csv = appSetting.NotificationTypes
 	 nTypes = csv.split(",")
 %>
 			<li style="color:#000;background-color:#fff;">
@@ -155,7 +176,9 @@
 				<legend>What alerts will you receive:</legend>
 					<fieldset data-role="controlgroup">
 						<input type="checkbox" name="EmergenciesCB" id="EmergenciesCB" class="custom" value="0"
-							<% if nTypes.include?('0')
+							<%
+								#If nTypes includes the value 0 for Emergencies, check the checkbox
+								if nTypes.include?('0')
 									selected="checked='checked'"
 								 else
 									selected=""
@@ -167,7 +190,9 @@
 						<label for="EmergenciesCB">Emergencies</label>
 	
 						<input type="checkbox" name="WeatherCB" id="WeatherCB" class="custom" value="1"
-							<% if nTypes.include?('1')
+							<%
+							#If nTypes includes the value 1 for Weather, check the checkbox
+								if nTypes.include?('1')
 									selected="checked='checked'"
 								 else
 									selected=""
@@ -179,7 +204,9 @@
 						<label for="WeatherCB">Weather</label>
 	
 						<input type="checkbox" name="NewsCB" id="NewsCB" class="custom" value="2"
-							<% if nTypes.include?('2')
+							<%
+							#If nTypes includes the value 2 for News, check the checkbox
+							if nTypes.include?('2')
 									selected="checked='checked'"
 								 else
 									selected=""
