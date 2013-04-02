@@ -8,8 +8,8 @@ class EmergencyController < Rho::RhoController
   include REXML
   
   # Handle popup events.
-  # ** This is currently broken. In the event user clicks  more info the color scheme 
-  # ** and layout stop functioning correctly.
+  # If more info is clicked navigate to the alerts info page
+  # If dismiss is vlicked do nothing
 	def popup_handler
 		title = @params['button_id']
 		if title == "Dismiss"               
@@ -23,7 +23,8 @@ class EmergencyController < Rho::RhoController
 		  end 
 		end
 	end	
-		
+	
+	# Navigate to the myru portal
 	def portal
 	  WebView.navigate "http://myru.radford.edu/cp/home/displaylogin"
 	end
@@ -34,9 +35,11 @@ class EmergencyController < Rho::RhoController
 	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
 	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
 	  end
+	  # Delete shown so the file isn't written incorrectly
 	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
       File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
 	  end
+	  # Download the updated feed
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
       :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
@@ -48,6 +51,7 @@ class EmergencyController < Rho::RhoController
 	# Do this on download complete
 	# Update the database
 	def httpdownload_callback
+		# Delete all emergencies and refresh the database
     Emergency.delete_all()
     file = File.new(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
     doc = REXML::Document.new(file)
@@ -90,18 +94,20 @@ class EmergencyController < Rho::RhoController
 	  end
 	end
 	
-	# Find all emergencys
+	# Find all emergencys when the emergency page is loaded
 	def emergency_page
 		@emergencys = Emergency.find(:all)
 	end
 
   # GET /Emergency
+  # Default index
   def index
     @emergencies = Emergency.find(:all)
     render :back => '/app'
   end
 
   # GET /Emergency/{1}
+  # Default show
   def show
     @emergency = Emergency.find(@params['id'])
     if @emergency
@@ -112,12 +118,14 @@ class EmergencyController < Rho::RhoController
   end
 
   # GET /Emergency/new
+  # Default new
   def new
     @emergency = Emergency.new
     render :action => :new, :back => url_for(:action => :index)
   end
 
   # GET /Emergency/{1}/edit
+  # Default edit 
   def edit
     @emergency = Emergency.find(@params['id'])
     if @emergency
@@ -128,12 +136,14 @@ class EmergencyController < Rho::RhoController
   end
 
   # POST /Emergency/create
+  # Default create
   def create
     @emergency = Emergency.create(@params['emergency'])
     redirect :action => :index
   end
 
   # POST /Emergency/{1}/update
+  # Default update
   def update
     @emergency = Emergency.find(@params['id'])
     @emergency.update_attributes(@params['emergency']) if @emergency
@@ -141,6 +151,7 @@ class EmergencyController < Rho::RhoController
   end
 
   # POST /Emergency/{1}/delete
+  # Default delete
   def delete
     @emergency = Emergency.find(@params['id'])
     @emergency.destroy if @emergency
