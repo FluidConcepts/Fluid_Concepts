@@ -6,7 +6,9 @@ require 'time'
 class EmergencyController < Rho::RhoController
   include BrowserHelper
   include REXML
-  
+  #####################################################
+  # !!MAY NEED TO CONFIGURE :url AROUND LINE 48!!     #
+  #####################################################
   # Handle popup events.
   # If more info is clicked navigate to the alerts info page
   # If dismiss is vlicked do nothing
@@ -32,17 +34,19 @@ class EmergencyController < Rho::RhoController
 	# Get rss feed and save to feed.xml in the app storage path
 	def refresh_database
 	  # Delete the stored data so new data is written correctly
-	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
-	    File.delete(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+	  @feedPath = File.join(Rho::RhoApplication::get_base_app_path, "feed.xml")
+	  @shownPath = File.join(Rho::RhoApplication::get_base_app_path, "shown")
+	  if File.exists?(@feedPath)
+	    File.delete(@feedPath)
 	  end
 	  # Delete shown so the file isn't written incorrectly
-	  if File.exists?(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
-      File.delete(File.join(Rho::RhoApplication::get_base_app_path, "shown"))
+	  if File.exists?(@shownPath)
+      File.delete(@shownPath)
 	  end
 	  # Download the updated feed
     Rho::AsyncHttp.download_file(
       :url => "https://php.radford.edu/~softeng02/rss-sim/rss.php",
-      :filename => File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"),
+      :filename => @feedPath,
       :headers => {},
       :callback => url_for(:action => :httpdownload_callback)
     )
@@ -53,7 +57,7 @@ class EmergencyController < Rho::RhoController
 	def httpdownload_callback
 		# Delete all emergencies and refresh the database
     Emergency.delete_all()
-    file = File.new(File.join(Rho::RhoApplication::get_base_app_path, "feed.xml"))
+    file = File.new(@feedPath)
     doc = REXML::Document.new(file)
     firstLoop = true
     #Parse each item element in this XML document.
@@ -70,7 +74,7 @@ class EmergencyController < Rho::RhoController
       # way.
       if firstLoop
         firstLoop = false
-        File.open(File.join(Rho::RhoApplication::get_base_app_path, "shown"), File::RDWR|File::CREAT){ |f|
+        File.open(@shownPath, File::RDWR|File::CREAT){ |f|
           f.flock(File::LOCK_EX)
           f.write(nixTimeStamp)
           f.close}
