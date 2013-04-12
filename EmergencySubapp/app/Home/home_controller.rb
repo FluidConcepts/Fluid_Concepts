@@ -68,7 +68,7 @@ class HomeController < Rho::RhoController
     if(@emergency != nil)                      # Can't display pop-up with no alerts
       @filter = AppSettings.find(:first).NotificationTypes
       @filter = @filter.split(',')
-      if(@emergency.fullTime > @@value && @filter.include?(@emergency.category))        # Only show pop-up if the newest hasn't been shown
+      if(@emergency.fullTime > @@value && (@filter.include?(@emergency.category) || @emergency.category.eql?("3")))        # Only show pop-up if the newest hasn't been shown
         # Show the pop-up
         Alert.show_popup( {
           :message => @emergency.description, 
