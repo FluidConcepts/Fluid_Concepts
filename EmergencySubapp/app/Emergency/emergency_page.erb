@@ -42,7 +42,7 @@
 			@emergencys.each do |emg| 
 			%>
 
-			  <% if emg.fullTime.to_i > @whatShouldIDisplay.to_i && (@filter.include?(emg.category) || emg.category.eql?("4")) %>
+			  <% if emg.fullTime.to_i > @whatShouldIDisplay.to_i && (@filter.include?(emg.category) || emg.category.eql?("3")) %>
   			  <a href="<%= url_for :action => :show, :id => emg.object %>">
   				<li style="color:#000;background-color:#fff;"><h3><%= emg.title %></h3>
   				<p><%= emg.description %></p>
