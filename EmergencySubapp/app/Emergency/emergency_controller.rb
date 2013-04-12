@@ -65,10 +65,26 @@ class EmergencyController < Rho::RhoController
       title = elm.elements["title"].text
       desc = elm.elements["description"].text
       date_time = elm.elements["pubDate"].text
-      date_array = [date_time[0..16], date_time[16..date_time.length-6]]
       category = elm.elements["category"].text
       # We want the "fulltime" element in our database to be a UNIX time-stamp because comparisons are easier.
-      nixTimeStamp = Time.parse(date_time).to_i
+      alertTime = Time.parse(date_time)
+      nixTimeStamp = alertTime.to_i
+      date_array = "PlaceHolder", "PlaceHolder"
+      # Convert the RSS pubDate to an easily readable format
+      date_array[0] = alertTime.month.to_s + "/" + alertTime.day.to_s + "/" + alertTime.year.to_s
+      if alertTime.hour > 12
+        hours = alertTime.hour - 12
+        pm = true
+      else
+        hours = alertTime.hour
+        pm = false
+      end
+      date_array[1] = hours.to_s + ":" + alertTime.min.to_s
+      if pm == true
+        date_array[1] = date_array[1] + " PM"
+      else
+        date_array[1] = date_array[1] + " AM"
+      end
       # Create this Emergency object in the database.
       Emergency.create({ "title" => title, "description" => desc, "time" => date_array[1], "date" => date_array[0], "fullTime" => nixTimeStamp, "category" => category})
       # This is a refresh call so the user will see the alert. Do not show a popup for any alert downloaded this
