@@ -8,7 +8,7 @@
     settings = AppSettings.find(:first).TimeIncrement
     if settings
       if settings != "never"
-        Rho::Timer.start(3000, url_for(:action => :checkNew), "nothing")
+        Rho::Timer.start(3000, url_for(:action => :checkNew), "Check for updates in background")
       end
     end 
   %>
