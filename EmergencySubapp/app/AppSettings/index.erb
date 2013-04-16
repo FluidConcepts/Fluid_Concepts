@@ -45,8 +45,22 @@ if appSetting.TimeIncrement =="never"
 %>
  data-theme="h"/>
     					<label for="radio-never">Never</label>
+    					
+							<input type="radio" name="TimeIncrement" id="radio-1mins" value="1"
+<%
+#If the TimeIncrement key value of the appSetting object is equal to 1
+#check the 1min radio button on the page
+if appSetting.TimeIncrement =="1" 
+			value = "checked='checked'"
+	 else
+			value = ""
+	end
+%>
+ 	<%=value%> 
+ data-theme="h"/>
+    					<label for="radio-1mins">Every 1 min</label>
 
-							<input type="radio" name="TimeIncrement" id="radio-5mins" value="5"
+<input type="radio" name="TimeIncrement" id="radio-5mins" value="5"
 <%
 #If the TimeIncrement key value of the appSetting object is equal to 5
 #check the 5min radio button on the page
