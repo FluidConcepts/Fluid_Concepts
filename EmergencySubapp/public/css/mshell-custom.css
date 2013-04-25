@@ -1250,7 +1250,7 @@
 .ui-body-b select,
 .ui-body-b textarea,
 .ui-body-b button {
-                       font-family: arial,helvetica,clean,sans-serif    /*{global-font-family}*/;
+color: #ffffff                       font-family: arial,helvetica,clean,sans-serif    /*{global-font-family}*/;
 }
 
 .ui-body-b .ui-link-inherit {
@@ -1259,7 +1259,7 @@
 }
 
 .ui-body-b .ui-link {
-                color: #3c819b;
+                color: #ffffff;
                 font-weight: bold;
                 font-family: arial,helvetica,clean,sans-serif;
 }
